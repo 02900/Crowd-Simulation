@@ -182,10 +182,11 @@ namespace AnticipatoryModel
             return 2;
         }
 
-        public static float TTC(Agent i, Agent j)
+        public static float TTC(Vector2 posA, Vector2 velA, float radA,
+            Vector2 posB, Vector2 velB, float radB)
         {
-            float r = i.radius + j.radius;
-            Vector2 w = j.position - i.position;
+            float r = radA + radB;
+            Vector2 w = posB - posA;
             float c = Vector2.Dot(w, w) - r * r;
 
             if (c < 0)
@@ -194,7 +195,7 @@ namespace AnticipatoryModel
                 return 0;
             }
 
-            Vector2 v = i.velocity - j.velocity;
+            Vector2 v = velA - velB;
             float a = Vector2.Dot(v, v);
             float b = Vector2.Dot(w, v);
 

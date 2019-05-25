@@ -181,7 +181,7 @@ namespace AnticipatoryModel
                             EKinematic[i] /= framesCountDelayed;
                             AddAgentStat(TIME_TRAVEL[i], DST_TRAVEL[i]);
                         }
-                        agents[i].ResetAnimParameters(true);
+                        agents[i].Anim.ResetAnimParameters(timeStep, true);
                     }
                 }
                 DesactivateVirtualAgents();
@@ -203,7 +203,7 @@ namespace AnticipatoryModel
                     playingRec = false;
                     results.CloseFile();
                     for (int i = 0; i < Agents.Length; i++)
-                        agents[i].ResetAnimParameters(true);
+                        agents[i].Anim.ResetAnimParameters(timeStep, true);
                 }
             }
         }
@@ -211,7 +211,7 @@ namespace AnticipatoryModel
         void PauseAnimation()
         {
             for (int i = 0; i < Agents.Length; i++)
-                Agents[i].ResetAnimParameters();
+                Agents[i].Anim.ResetAnimParameters(timeStep);
         }
 
         public List<List<int>> GetGroups { get { return groups; } set { groups = value; } }

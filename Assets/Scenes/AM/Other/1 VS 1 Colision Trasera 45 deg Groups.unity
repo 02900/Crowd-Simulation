@@ -128,6 +128,16 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!137 &19479717 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137765626592933632, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1377100281}
+--- !u!137 &37652834 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137765626592933632, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1765801268}
 --- !u!1 &76588629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1139,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &737707287 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1008424010228714, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 2144888347}
+--- !u!114 &737707288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 737707287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b344079330a4404d98d45e7ce7dc3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color1: {r: 0, g: 1, b: 1, a: 1}
+  Color2: {r: 0, g: 0, b: 1, a: 1}
+  _renderer: {fileID: 1896200291}
 --- !u!1 &751437121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,6 +1598,25 @@ Transform:
   m_Father: {fileID: 1351357610}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &943710660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1008424010228714, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1377100281}
+--- !u!114 &943710661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 943710660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b344079330a4404d98d45e7ce7dc3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color1: {r: 0, g: 1, b: 1, a: 1}
+  Color2: {r: 0, g: 0, b: 1, a: 1}
+  _renderer: {fileID: 19479717}
 --- !u!1001 &1016634894
 Prefab:
   m_ObjectHideFlags: 0
@@ -1629,6 +1677,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
   m_IsPrefabAsset: 0
+--- !u!137 &1094267801 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137765626592933632, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 2044159145}
 --- !u!1001 &1095548283
 Prefab:
   m_ObjectHideFlags: 0
@@ -1816,6 +1869,11 @@ MonoBehaviour:
   used: 0
   usedByID: 0
   debug: 1
+--- !u!137 &1201662375 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137765626592933632, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1016634894}
 --- !u!1001 &1235282974
 Prefab:
   m_ObjectHideFlags: 0
@@ -2739,7 +2797,7 @@ Prefab:
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: debugGroups
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4491587100219296, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2912,6 +2970,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1830568788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1008424010228714, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1765801268}
+--- !u!114 &1830568789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1830568788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b344079330a4404d98d45e7ce7dc3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color1: {r: 0, g: 1, b: 1, a: 1}
+  Color2: {r: 0, g: 0, b: 1, a: 1}
+  _renderer: {fileID: 37652834}
 --- !u!4 &1830568794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
@@ -3104,6 +3181,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!137 &1896200291 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137765626592933632, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 2144888347}
 --- !u!1 &1904819518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3641,6 +3723,44 @@ MonoBehaviour:
   used: 0
   usedByID: 0
   debug: 1
+--- !u!1 &2104409039 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1008424010228714, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1016634894}
+--- !u!114 &2104409040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2104409039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b344079330a4404d98d45e7ce7dc3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color1: {r: 0, g: 1, b: 1, a: 1}
+  Color2: {r: 0, g: 0, b: 1, a: 1}
+  _renderer: {fileID: 1201662375}
+--- !u!1 &2120923704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1008424010228714, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 2044159145}
+--- !u!114 &2120923705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2120923704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b344079330a4404d98d45e7ce7dc3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color1: {r: 0, g: 1, b: 1, a: 1}
+  Color2: {r: 0, g: 0, b: 1, a: 1}
+  _renderer: {fileID: 1094267801}
 --- !u!1001 &2144888347
 Prefab:
   m_ObjectHideFlags: 0

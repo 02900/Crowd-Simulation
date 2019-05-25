@@ -51,6 +51,8 @@ namespace AnticipatoryModel
         strategies curStrategy = strategies.NULL;
         public strategies GetCurrentStrategy { get { return curStrategy; } }
 
+
+
         float duration;
         float cacheDuration;
         #endregion
@@ -63,26 +65,12 @@ namespace AnticipatoryModel
         [SerializeField] float fixedPrefSpeed = 0;      // The goal position of the  
         #endregion
 
-        #region for Color Speed
-        [SerializeField] Color Color1 = Color.blue, Color2 = Color.cyan;
-        [SerializeField] Renderer _renderer = null;
-        MaterialPropertyBlock _propBlock;
-        #endregion
+        AnimationController anim;
+        public AnimationController Anim { get { return anim; } }
 
-        #region for animation
-        Animator m_Animator;
-        float m_TurnAmount;
-        float m_ForwardAmount;
-        Vector3 m_GroundNormal;
-
-        const float m_MovingTurnSpeed = 360;
-        const float m_StationaryTurnSpeed = 180;
-        #endregion
-
-        #region init real word
-        void Awake() { 
-            _propBlock = new MaterialPropertyBlock();
-            m_Animator = GetComponent<Animator>();
+        void Awake()
+        {
+            anim = GetComponent<AnimationController>();
         }
 
         void Start()
@@ -100,7 +88,6 @@ namespace AnticipatoryModel
             if (System.Math.Abs(fixedPrefSpeed) > EPSILON) prefSpeed = fixedPrefSpeed;
             prefSpeedCache = prefSpeed;
         }
-        #endregion
 
         public void Init(int id, Vector2 position, Vector2 goal)
         {
@@ -171,7 +158,8 @@ namespace AnticipatoryModel
                         dirToTarget, dstToTarget, obstacleMask))
                     {
                         // compute time to collision
-                        ttc.Add(n.id, Global.TTC(this, n));
+                        ttc.Add(n.id, Global.TTC(position, velocity, radius, 
+                            n.position, n.velocity, n.radius));
                     }
                 }
             }
@@ -194,7 +182,8 @@ namespace AnticipatoryModel
                         if (!ttc.ContainsKey(n.id))
                         {
                             // compute time to collision
-                            ttc.Add(n.id, Global.TTC(this, n));
+                            ttc.Add(n.id, Global.TTC(position, velocity, radius,
+                                n.position, n.velocity, n.radius));
                         }
                     }
                 }
@@ -372,14 +361,14 @@ namespace AnticipatoryModel
                 float gRad;
 
                 if (Groups.PercivingGroups(position, goal - position, radius, group, ttc, out gPos, out gVel, out gRad, debugGroups)) {
-                    Debug.Log(id + " i can see a group");
                     var vAgents = Engine.Instance.VirtualAgents;
                     for (int i = 0; i < vAgents.Length; i++)
                     {
                         if (!vAgents[i].Used)
                         {
                             vAgents[i].SetupAgent(gRad, gPos, gVel);
-                            group_ttc.Add(vAgents[i].id, Global.TTC(this, vAgents[i]));
+                            group_ttc.Add(vAgents[i].id, Global.TTC(position, velocity, radius,
+                                vAgents[i].position, vAgents[i].velocity, vAgents[i].radius));
                         }
                     }
                 }
@@ -468,17 +457,14 @@ namespace AnticipatoryModel
             }
         }
 
-        /// <summary>
-        /// Real World
-        /// </summary>
         public void MoveInRealWorld()
         {
-            ColorSpeed();
+            Vector3 vel = ExtensionMethods.Vector2ToVector3(velocity);
+            anim.ColorSpeed(vel);
 
             transform.localPosition = new Vector3(position.x, 0, position.y);
             float distanceToTarget = Vector3.Distance(goal3d, transform.localPosition);
-
-            Move(ExtensionMethods.Vector2ToVector3(velocity.normalized));
+            anim.Move(vel, Engine.timeStep);
 
             // Agent is within one radius of its goal then go to next waypoint
             if (distanceToTarget < goalRadius * 2)
@@ -491,19 +477,10 @@ namespace AnticipatoryModel
 
         public void RecMove()
         {
-            ColorSpeed();
+            Vector3 vel = ExtensionMethods.Vector2ToVector3(velocity);
+            anim.ColorSpeed(vel);
             transform.localPosition = new Vector3(position.x, 0, position.y);
-            Move(ExtensionMethods.Vector2ToVector3(velocity.normalized));
-        }
-
-        void ColorSpeed()
-        {
-            // Get the current value of the material properties in the renderer.
-            _renderer.GetPropertyBlock(_propBlock);
-            // Assign our new value.
-            _propBlock.SetColor("_Color", Color.Lerp(Color1, Color2, GetPercentSpeed()));
-            // Apply the edited values to the renderer.
-            _renderer.SetPropertyBlock(_propBlock);
+            anim.Move(vel, Engine.timeStep);
         }
 
         Vector3[] GetWaypoints(Transform goalTransform, NavMeshAgent agent)
@@ -515,46 +492,6 @@ namespace AnticipatoryModel
                 return path.corners;
 
             return new Vector3[] { };
-        }
-
-        float GetPercentSpeed()
-        {
-            if (System.Math.Abs(velocity.magnitude) < EPSILON) return 0.01f;
-            return velocity.magnitude / 3;
-        }
-
-        public void Move(Vector3 dir)
-        {
-            // convert the world relative moveInput vector into a local-relative
-            // turn amount and forward amount required to head in the desired
-            // direction.
-            dir = transform.InverseTransformDirection(dir);
-            dir = Vector3.ProjectOnPlane(dir, m_GroundNormal);
-
-            m_TurnAmount = Mathf.Atan2(dir.x, dir.z);
-            m_ForwardAmount = dir.z * GetPercentSpeed();
-
-            LookWhereImGoing();
-            UpdateAnimator(dir);
-        }
-
-        private void LookWhereImGoing()
-        {
-            float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
-            transform.Rotate(0, m_TurnAmount * turnSpeed * Engine.timeStep, 0);
-        }
-
-        private void UpdateAnimator(Vector3 move)
-        {
-            m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Engine.timeStep);
-            m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Engine.timeStep);
-        }
-
-        public void ResetAnimParameters(bool full = false)
-        {
-            m_Animator.SetFloat("Forward", 0, full ? 0 : 0.1f, Engine.timeStep);
-            m_Animator.SetFloat("Turn", 0, full ? 0 : 0.1f, Engine.timeStep);
-            ColorSpeed();
         }
     }
 }
