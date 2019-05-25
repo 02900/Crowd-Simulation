@@ -8,7 +8,7 @@ namespace AnticipatoryModel
     {
         public static Engine Instance;
         public const float timeStep = 0.01f;
-        const float moreDelayedTimeStep = 0.01f;
+        const float moreDelayedTimeStep = 0.2f;
         const float mass_half = 33;
         float framesCount;
         float framesCountDelayed;
@@ -90,9 +90,7 @@ namespace AnticipatoryModel
         void CreateVirtualAgents() {
             VirtualAgents = FindObjectsOfType<AMVirtualAgent>();
             for (int i = 0; i < VirtualAgents.Length; i++)
-            {
                 VirtualAgents[i].id = i;
-            }
         }
 
         void CreateAgents()

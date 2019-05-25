@@ -2595,11 +2595,11 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 1024
-  debugLog: 1
+  debugLog: 0
   debugGroups: 0
-  useGroups: 0
+  useGroups: 1
   navmesh: 0
-  fixedPrefSpeed: 3
+  fixedPrefSpeed: 1.4
 --- !u!114 &114036221499064514
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -169,9 +169,9 @@ namespace AnticipatoryModel
             Point agentPos = new Point(pov);
             List<Point> tangentsPoints;
             List<Tuple<Point, Point>> points;
-            Vector2 closestAgentPosition, closestAgentVelocity;
+            Vector2 closestAgentPosition;
 
-            GetTangents(group, ttc, pov, rad, out closestAgentPosition, out closestAgentVelocity, out tangentsPoints, out points);
+            GetTangents(group, ttc, pov, rad, out closestAgentPosition, out gVel, out tangentsPoints, out points);
 
             // Necesitamos al menos 2 agentes para formar un grupo
             if (tangentsPoints.Count < 4) return false;
@@ -220,7 +220,7 @@ namespace AnticipatoryModel
             // al fin tenemos el vendito punto de interseccion jajajajja
             // ahora la distancia desde el al centro es el radio xD
             // radio del agente virual
-            f_t1 = Vector2.Distance(gPos, v_t1);
+            gRad = Vector2.Distance(gPos, v_t1);
 
             if (debug)
             {
@@ -237,12 +237,8 @@ namespace AnticipatoryModel
                 DrawCircle(0.1f, gPos);
 
                 // Radio del grupo
-                DrawCircle(f_t1, gPos);
+                DrawCircle(gRad, gPos);
             }
-
-            foreach (int neighborID in group)
-                if (ttc.ContainsKey(neighborID))
-                    ttc[neighborID] = Mathf.Infinity;
 
             return true;
         }

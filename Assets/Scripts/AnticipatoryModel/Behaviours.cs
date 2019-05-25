@@ -57,7 +57,6 @@ namespace AnticipatoryModel
         public static Vector2 FollowStrategy(float radius, float prefSpeed, 
             Vector2 posA, Vector2 velA, Vector2 posB, Vector2 velB)
         {
-            float magnitude;
             float ttr = 1.5f;                     // reaction time
             float df = radius * 3 + 1.5f;         // zone contact + personal distances
 
@@ -67,9 +66,7 @@ namespace AnticipatoryModel
             // distance to future position of leader
             float dstLeader = (pl - posA).magnitude;
             float vf = (dstLeader - df) / (Engine.timeStep + ttr);
-
-            magnitude = vf > prefSpeed ? prefSpeed : vf;
-            return velA.normalized * magnitude;
+            return velA.normalized * Mathf.Clamp(vf, 0, prefSpeed);
         }
 
         public static float BearingAngle(Vector2 velocity, Vector2 dir)
@@ -84,8 +81,6 @@ namespace AnticipatoryModel
         {
             // dir equal 1 is left, -1 is right
             float bearingAngle = BearingAngle(velocity, dir), turn;
-
-            if (debug) Debug.Log(bearingAngle);
 
             if (!lateral)
             {

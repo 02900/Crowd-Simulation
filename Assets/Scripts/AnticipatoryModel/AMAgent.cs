@@ -8,7 +8,7 @@ namespace AnticipatoryModel
     public class AMAgent : Agent
     {
         const float EPSILON = 0.02f;
-        public const float goalRadius = 0.5f;
+        const float goalRadius = 0.5f;
 
         #region definition of agent
         float prefSpeed;               // The max speed of the  
@@ -101,7 +101,7 @@ namespace AnticipatoryModel
 
             base.position = position;
             this. goal = goal;
-            radius = Random.Range(0.25f, 0.5f);
+            radius = 0.25f;
             prefSpeed = 3 + Mathf.Abs(rnd);
             timeHorizon = Random.Range(3.0f, 8.0f);
             neighborDist = Random.Range(8.0f, 12.0f);
@@ -191,8 +191,43 @@ namespace AnticipatoryModel
                     }
                 }
             }
-        }  
- 
+        }
+
+        void DetectingGroups()
+        {
+            group_ttc.Clear();
+            if (Engine.Instance.GetGroups.Count == 0) return;
+
+            foreach (List<int> group in Engine.Instance.GetGroups)
+            {
+                Vector2 gPos, gVel;
+                float gRad;
+
+                if (Groups.PercivingGroups(position, goal - position, radius,
+                    group, ttc, out gPos, out gVel, out gRad, debugGroups))
+                {
+                    var vAgents = Engine.Instance.VirtualAgents;
+                    for (int i = 0; i < vAgents.Length; i++)
+                    {
+                        if (!vAgents[i].Used)
+                        {
+                            vAgents[i].SetupAgent(gRad, gPos, gVel);
+
+                            group_ttc.Add(vAgents[i].id, Global.TTC(position, velocity, radius,
+                                vAgents[i].position, vAgents[i].velocity, vAgents[i].radius));
+
+                            foreach (int neighborID in group)
+                                if (ttc.ContainsKey(neighborID) &&
+                                    ttc[neighborID] > group_ttc[vAgents[i].id])
+                                    ttc[neighborID] = Mathf.Infinity;
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
         void ResetStrategy()
         {
             curStrategy = strategies.NULL;
@@ -236,44 +271,39 @@ namespace AnticipatoryModel
             else { velocity = Behaviours.GetSteering(position, goal, prefSpeed); }
         }
 
-        void DetectingGroups() {
-            group_ttc.Clear();
-            if (Engine.Instance.GetGroups.Count == 0) return;
-
-            foreach (List<int> group in Engine.Instance.GetGroups) {
-                Vector2 gPos, gVel;
-                float gRad;
-
-                if (Groups.PercivingGroups(position, goal - position, radius, group, ttc, out gPos, out gVel, out gRad, debugGroups)) {
-                    var vAgents = Engine.Instance.VirtualAgents;
-                    for (int i = 0; i < vAgents.Length; i++)
-                    {
-                        if (!vAgents[i].Used)
-                        {
-                            vAgents[i].SetupAgent(gRad, gPos, gVel);
-                            group_ttc.Add(vAgents[i].id, Global.TTC(position, velocity, radius,
-                                vAgents[i].position, vAgents[i].velocity, vAgents[i].radius));
-                        }
-                    }
-                }
-            }
-        }
-
         void ApplyStrategy()
         {
-            int[] s = { 3 };
-            DetermineStrategy(s);
+            //float theta = 2 * Mathf.Atan(radius / Vector2.Distance(position, neighbor.position)) * Mathf.Rad2Deg;
 
-            //float vAngle = Vector2.Angle(velocity, neighbor.velocity);
-            //if (System.Math.Abs(vAngle - 180) < thresholdCol) FrontCollision();
-            //else if (System.Math.Abs(vAngle) < thresholdCol) RearCollision();
-            //else LateralCollision();
+            float vAngle = Vector2.Angle(velocity, neighbor.velocity);
+            if (System.Math.Abs(vAngle - 180) < thresholdCol) FrontCollision();
+            else if (System.Math.Abs(vAngle) < thresholdCol) RearCollision();
+            else LateralCollision();
+
+            //if (debugLog)
+            //{
+            //    Vector2 VELA = ExtensionMethods.RotateVector(velocity, thresholdCol) * 4;
+            //    Vector2 VELB = ExtensionMethods.RotateVector(velocity, -thresholdCol) * 4;
+
+            //    //Vector2 VELA2 = ExtensionMethods.RotateVector(velocity, theta) * 8;
+            //    //Vector2 VELB2 = ExtensionMethods.RotateVector(velocity, -theta) * 8;
+
+            //    Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELA), Color.red);
+            //    Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELB), Color.red);
+
+            //    //Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELA2), Color.blue);
+            //    //Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELB2), Color.blue);
+
+            //    Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), -ExtensionMethods.Vector2ToVector3(VELA));
+            //    Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), -ExtensionMethods.Vector2ToVector3(VELB));
+
+            //    Debug.DrawRay(new Vector3(position.x, 2, position.y), ExtensionMethods.Vector2ToVector3(neighbor.velocity) * 4, Color.cyan);
+            //}
         }
 
         void FrontCollision()
         {
-            //Debug.Log("Colision de frontal de ambos agentes");
-            if (debugLog) Debug.Log("My id:" + id + ", Colision Front-Mutual");
+            if (debugLog) DebugCollisionType(0);
 
             int[] s = { 1 };
 
@@ -290,18 +320,20 @@ namespace AnticipatoryModel
         {
             float bearingAngle = Behaviours.BearingAngle(velocity, neighbor.position - position);
 
+            // Front
             if (bearingAngle <= 90 || bearingAngle > 270)
             {
-                if (debugLog) Debug.Log("My id:" + id + ", Colision Back");
-                int[] s = { 1 };
+                if (debugLog) DebugCollisionType(1);
+                int[] s = { 1, 2 };
                 DetermineStrategy(s);
             }
 
+            // Back
             // (bearingAngle > 90 && bearingAngle <= 270)
             else
             {
-                if (debugLog) Debug.Log("My id:" + id + ", Colision Front-1");
-                int[] s = { 1, 2 };
+                if (debugLog) DebugCollisionType(2);
+                int[] s = { 3 };
                 if (neighbor.velocity.sqrMagnitude < 1) s = new int[] { 1 };
                 DetermineStrategy(s);
             }
@@ -309,9 +341,34 @@ namespace AnticipatoryModel
 
         void LateralCollision()
         {
-            if (debugLog) Debug.Log("My id:" + id + ", Colision Lateral");
+            if (debugLog) DebugCollisionType(3);
             int[] s = { 1 };
             DetermineStrategy(s, true);
+        }
+
+        void DebugCollisionType(int i)
+        {
+            switch (i) {
+                case 0:
+                    Debug.Log("Collision Between yo: " + id + " and" +
+                        " he: " + neighbor.id + ", its a Colision Front-Mutual");
+                    break;
+
+                case 1:
+                    Debug.Log("Collision Between yo: " + id + " and" +
+                        " he: " + neighbor.id + ", its a Colision Front-Only");
+                    break;
+
+                case 2:
+                    Debug.Log("Collision Between yo: " + id + " and" +
+                        " he: " + neighbor.id + ", its a Colision Back");
+                    break;
+
+                case 3:
+                    Debug.Log("Collision Between yo: " + id + " and" +
+                        " he: " + neighbor.id + ", its a Colision Lateral");
+                    break;
+            }
         }
 
         void DetermineStrategy(int[] s, bool lateral = false)

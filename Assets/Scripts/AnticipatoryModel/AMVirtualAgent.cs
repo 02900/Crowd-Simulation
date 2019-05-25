@@ -15,7 +15,7 @@ namespace AnticipatoryModel
             this.radius = radius;
             this.position = position;
             this.velocity = velocity;
-            this.used = true;
+            used = true;
             isVirtual = true;
         }
 
@@ -24,7 +24,6 @@ namespace AnticipatoryModel
             if (!debug) return;
 
             int i = 0;
-            Transform agent = GetComponent<Transform>();
             Gizmos.color = Color.green;
             float theta = 0;
             float x = radius * Mathf.Cos(theta);
