@@ -31,14 +31,11 @@ namespace AnticipatoryModel
 
         #region state of agent
         public Vector2 goal { get; set; }                  // The goal of the character. 
-
-        // Collision avoidance parameters
-        Agent neighbor;                              // Agent to collide
+        Agent neighbor;
         Agent SetNeigbor { set { neighbor = value; ResetStrategy(); } }
-
+        float min_ttc;
         Dictionary<int, float> ttc = new Dictionary<int, float>();
         Dictionary<int, float> group_ttc = new Dictionary<int, float>();
-        float min_ttc;
         #endregion
 
         #region eval strategy
@@ -115,6 +112,9 @@ namespace AnticipatoryModel
 
         public bool DoStep()
         {
+            if (debugLog) Debug.DrawRay(new Vector3(position.x, 1.5f, position.y),
+                new Vector3(velocity.x, 0, velocity.y), Color.magenta);
+
             Vector2 dir = goal - position;
             float distSqToGoal = dir.sqrMagnitude;
 
@@ -261,10 +261,13 @@ namespace AnticipatoryModel
 
         void ApplyStrategy()
         {
-            float vAngle = Vector2.Angle(velocity, neighbor.velocity);
-            if (System.Math.Abs(vAngle - 180) < thresholdCol) FrontCollision();
-            else if (System.Math.Abs(vAngle) < thresholdCol) RearCollision();
-            else LateralCollision();
+            int[] s = { 3 };
+            DetermineStrategy(s);
+
+            //float vAngle = Vector2.Angle(velocity, neighbor.velocity);
+            //if (System.Math.Abs(vAngle - 180) < thresholdCol) FrontCollision();
+            //else if (System.Math.Abs(vAngle) < thresholdCol) RearCollision();
+            //else LateralCollision();
         }
 
         void FrontCollision()
@@ -338,13 +341,11 @@ namespace AnticipatoryModel
                     velocity = Behaviours.DecelerationStrategy(min_ttc, velocity);
                     break;
 
-
                 case strategies.CH:
                     velocity = Behaviours.GetSteering(position, goal, prefSpeed);
                     velocity = Behaviours.ChangeDirectionStrategy(velocity,
                         neighbor.position - position, lateral, min_ttc, debugLog);
                     break;
-
 
                 case strategies.F:
                     velocity = Behaviours.GetSteering(position, goal, prefSpeed);
@@ -352,14 +353,18 @@ namespace AnticipatoryModel
                         velocity, neighbor.position, neighbor.velocity);
                     break;
 
-                case strategies.A: Behaviours.CollisionAvoidance(position, velocity, 
-                    velocity = Behaviours.GetSteering(position, goal, prefSpeed), timeHorizon, ttc);
+                case strategies.A:
+                    velocity += Behaviours.CollisionAvoidance(position, velocity, 
+                    Behaviours.GetSteering(position, goal, prefSpeed), timeHorizon, ttc, group_ttc);
                     break;
 
                 case strategies.N:
                     velocity = Behaviours.GetSteering(position, goal, prefSpeed);
                     break;
             }
+
+            if (debugLog) Debug.DrawRay(new Vector3(position.x, 1.5f, position.y),
+                new Vector3(velocity.x, 0, velocity.y), Color.green);
         }
 
         public void MoveInRealWorld()

@@ -24,7 +24,7 @@ public class AnimationController : MonoBehaviour {
     float GetPercentSpeed(Vector3 velocity)
     {
         if (System.Math.Abs(velocity.magnitude) < EPSILON) return 0.01f;
-        return velocity.magnitude / 3;
+        return velocity.magnitude / 2;
     }
 
     public void Move(Vector3 velocity, float timeStep)

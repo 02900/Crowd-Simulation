@@ -7,7 +7,7 @@ namespace AnticipatoryModel
     public static class Groups
     {
         // Group detection: predefined thresholds 
-        const int MIN_DISTANCE = 1;             // Distancia Minima para comportamiento de grupos
+        const int MIN_DISTANCE = 2;             // Distancia Minima para comportamiento de grupos
         const int MAX_DISTANCE = 1000;         // Distancia Maxima para comportamiento de grupos
         const int MIN_ANGLE = 180;
         const int MAX_ANGLE = -180;
@@ -239,6 +239,10 @@ namespace AnticipatoryModel
                 // Radio del grupo
                 DrawCircle(f_t1, gPos);
             }
+
+            foreach (int neighborID in group)
+                if (ttc.ContainsKey(neighborID))
+                    ttc[neighborID] = Mathf.Infinity;
 
             return true;
         }
