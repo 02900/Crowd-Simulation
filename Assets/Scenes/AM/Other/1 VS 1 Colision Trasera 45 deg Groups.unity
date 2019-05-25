@@ -1674,6 +1674,11 @@ Prefab:
       propertyPath: debugGroups
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+        type: 2}
+      propertyPath: debugLog
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
   m_IsPrefabAsset: 0
@@ -2280,6 +2285,11 @@ Prefab:
       propertyPath: useGroups
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+        type: 2}
+      propertyPath: debugLog
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
   m_IsPrefabAsset: 0
@@ -2797,7 +2807,7 @@ Prefab:
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: debugGroups
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4491587100219296, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2806,12 +2816,17 @@ Prefab:
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: fixedPrefSpeed
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: useGroups
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+        type: 2}
+      propertyPath: debugLog
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
@@ -2989,6 +3004,23 @@ MonoBehaviour:
   Color1: {r: 0, g: 1, b: 1, a: 1}
   Color2: {r: 0, g: 0, b: 1, a: 1}
   _renderer: {fileID: 37652834}
+--- !u!114 &1830568790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1830568788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b2eea109c63be4499ad2263257660b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allRadius:
+  - 2
+  - 3
+  colors:
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
 --- !u!4 &1830568794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
@@ -3675,6 +3707,11 @@ Prefab:
       propertyPath: debugGroups
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+        type: 2}
+      propertyPath: debugLog
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
   m_IsPrefabAsset: 0
@@ -3817,6 +3854,11 @@ Prefab:
         type: 2}
       propertyPath: debugGroups
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+        type: 2}
+      propertyPath: debugLog
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}

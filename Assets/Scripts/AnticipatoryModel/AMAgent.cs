@@ -51,8 +51,6 @@ namespace AnticipatoryModel
         strategies curStrategy = strategies.NULL;
         public strategies GetCurrentStrategy { get { return curStrategy; } }
 
-
-
         float duration;
         float cacheDuration;
         #endregion
@@ -67,14 +65,19 @@ namespace AnticipatoryModel
 
         AnimationController anim;
         public AnimationController Anim { get { return anim; } }
+        DrawCircleGizmos drawCircles;
 
         void Awake()
         {
             anim = GetComponent<AnimationController>();
+            drawCircles = GetComponent<DrawCircleGizmos>();
         }
 
         void Start()
         {
+            name = "Agent " + id;
+            drawCircles.allRadius[0] = radius;
+
             target = transform.childCount > 3 ? transform.GetChild(0) : null;
             if (target) goal3d = target.position;
 
@@ -188,126 +191,7 @@ namespace AnticipatoryModel
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// Only move to goal direction with vpref
-        /// </summary>
-        Vector2 GetSteering()
-        {
-            Vector2 dir = goal - position;
-            velocity += dir.normalized * prefSpeed;
-            return velocity;
-        }
-
-        /// <summary>
-        /// Basic algorithm to avoidance collisions
-        /// </summary>
-        void Anticipatory()
-        {
-            Vector2 FAvoid;
-
-            // vg is the agent’s goal velocity
-            Vector2 goalVelocity = GetSteering();
-            // k is a tunable parameter that controls the strength of the goal force
-            float k = 2;
-
-            // Compute goal force
-            Vector2  acceleration = k * (goalVelocity - velocity);
-
-            foreach (var key in ttc.Keys) {
-            
-                // compute time to collision
-                float t = ttc[key];
-                if (float.IsInfinity(t)) continue;
-
-                AMAgent agent_tmp = Engine.Instance.GetAgent(key);
-
-                // Compute collision avoidance force
-                FAvoid = position + velocity * t
-                    - agent_tmp.position - agent_tmp.velocity * t;
-
-                FAvoid *= 1 / (t + 0.1f);
-
-                if (System.Math.Abs(FAvoid.x) > EPSILON &&
-                    System.Math.Abs(FAvoid.y) > EPSILON)
-                    FAvoid /= Mathf.Sqrt(Vector2.Dot(FAvoid, FAvoid));
-
-                // Force Magnitude
-                float mag = 0;
-                if (t >= 0 && t <= timeHorizon)
-                    mag = (timeHorizon - t) / t + 0.1f;
-                if (mag > 100) mag = 100;
-                FAvoid *= mag;
-                acceleration += FAvoid;
-            }
-
-            velocity += acceleration * Engine.timeStep;
-        }
-
-        void FollowStrategy()
-        {
-            float magnitude;
-            float ttr = 1.5f;                     // reaction time
-            float df = radius * 3 + 1.5f;         // zone contact + personal distances
-
-            // Posicion futura del leader
-            Vector2 pl = neighbor.position + neighbor.velocity * Engine.timeStep;
-
-            // distance to future position of leader
-            float dstLeader = (pl - position).magnitude;
-            float vf = (dstLeader - df) / (Engine.timeStep + ttr);
-
-            magnitude = vf > prefSpeed ? prefSpeed : vf;
-            velocity = velocity.normalized * magnitude;
-        }
-
-        float BearingAngle()
-        {
-            float a = -Vector2.SignedAngle(velocity, neighbor.position - position);
-            if (a < 0) a += 360;
-            return a;
-        }
-
-        void ChangeDirectionStrategy(bool lateral)
-        {
-            // dir equal 1 is left, -1 is right
-            float bearingAngle = BearingAngle(), dir;
-
-            if (debugLog) Debug.Log(bearingAngle);
-
-            if (!lateral) {
-                if (bearingAngle < 180) dir = 1;
-                else dir = -1;
-
-                if (System.Math.Abs(bearingAngle) < EPSILON 
-                    || System.Math.Abs(bearingAngle - 360) < EPSILON
-                    || System.Math.Abs(bearingAngle - 180) < EPSILON) {
-                    dir = Random.Range(0, 11) > 5  ? -1 : 1;
-                }
-            }
-
-            else {
-                if (bearingAngle >= 10 && bearingAngle < 170
-                    || bearingAngle >= 185 && bearingAngle < 350) dir = 1;
-                else {
-                    if (bearingAngle < 180) dir = 1;
-                    else dir = -1;
-                }
-            }
-
-            float w = 10 / (Mathf.Pow(min_ttc, 2) + 0.25f);
-            Vector2 velOrtho = ExtensionMethods.RotateVector(velocity.normalized, 90);
-            velocity = ExtensionMethods.RotateVector(velocity, dir * w);
-            velocity += dir * velOrtho * 0.1f;
-        }
-
-        void DecelerationStrategy()
-        {
-            float k = min_ttc < 2 ? 2 : min_ttc;
-            k = Mathf.Exp(-0.15f * k * k);
-            velocity = velocity * (1 - k);
-        }
+        }  
  
         void ResetStrategy()
         {
@@ -349,7 +233,7 @@ namespace AnticipatoryModel
                 else neighbor = Engine.Instance.GetVirtualAgent(j);
                 ApplyStrategy();
             }
-            else { GetSteering(); }
+            else { velocity = Behaviours.GetSteering(position, goal, prefSpeed); }
         }
 
         void DetectingGroups() {
@@ -401,7 +285,7 @@ namespace AnticipatoryModel
 
         void RearCollision()
         {
-            float bearingAngle = BearingAngle();
+            float bearingAngle = Behaviours.BearingAngle(velocity, neighbor.position - position);
 
             if (bearingAngle <= 90 || bearingAngle > 270)
             {
@@ -449,11 +333,32 @@ namespace AnticipatoryModel
 
             switch (curStrategy)
             {
-                case strategies.DCC: GetSteering(); DecelerationStrategy(); break;
-                case strategies.CH: GetSteering(); ChangeDirectionStrategy(lateral); break;
-                case strategies.F: GetSteering(); FollowStrategy(); break;
-                case strategies.A: Anticipatory(); break;
-                case strategies.N: GetSteering(); break;
+                case strategies.DCC:
+                    velocity = Behaviours.GetSteering(position, goal, prefSpeed);
+                    velocity = Behaviours.DecelerationStrategy(min_ttc, velocity);
+                    break;
+
+
+                case strategies.CH:
+                    velocity = Behaviours.GetSteering(position, goal, prefSpeed);
+                    velocity = Behaviours.ChangeDirectionStrategy(velocity,
+                        neighbor.position - position, lateral, min_ttc, debugLog);
+                    break;
+
+
+                case strategies.F:
+                    velocity = Behaviours.GetSteering(position, goal, prefSpeed);
+                    velocity = Behaviours.FollowStrategy(radius, prefSpeed, position, 
+                        velocity, neighbor.position, neighbor.velocity);
+                    break;
+
+                case strategies.A: Behaviours.CollisionAvoidance(position, velocity, 
+                    velocity = Behaviours.GetSteering(position, goal, prefSpeed), timeHorizon, ttc);
+                    break;
+
+                case strategies.N:
+                    velocity = Behaviours.GetSteering(position, goal, prefSpeed);
+                    break;
             }
         }
 
