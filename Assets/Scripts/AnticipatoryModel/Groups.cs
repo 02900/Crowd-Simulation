@@ -7,7 +7,7 @@ namespace AnticipatoryModel
     public static class Groups
     {
         // Group detection: predefined thresholds 
-        const int MIN_DISTANCE = 2;             // Distancia Minima para comportamiento de grupos
+        const int MIN_DISTANCE = 1;             // Distancia Minima para comportamiento de grupos
         const int MAX_DISTANCE = 1000;         // Distancia Maxima para comportamiento de grupos
         const int MIN_ANGLE = 180;
         const int MAX_ANGLE = -180;
@@ -30,13 +30,13 @@ namespace AnticipatoryModel
             closestAgentPosition = Vector2.zero;
             closestAgentVelocity = Vector2.zero;
 
-            foreach (int neighborID in group)
+            foreach (int id in group)
             {
                 //if (group.Contains(id)) break;
-                if (!ttc.ContainsKey(neighborID)) continue;
+                if (!ttc.ContainsKey(id)) continue;
 
                 // Calculamos el agente mas cercano al observador
-                AMAgent agent_tmp = Engine.Instance.GetAgent(neighborID);
+                AMAgent agent_tmp = Engine.Instance.GetAgent(id);
                 float dst = Vector2.Distance(position, agent_tmp.position);
 
                 // Si este agente esta mas cerca de lo permitido entonces
@@ -49,10 +49,10 @@ namespace AnticipatoryModel
                     minDst = dst;
                 }
 
-                if (ttc[neighborID] < minimoTTC)
+                if (ttc[id] < minimoTTC)
                 {
                     closestAgentVelocity = agent_tmp.velocity;
-                    minimoTTC = ttc[neighborID];
+                    minimoTTC = ttc[id];
                 }
 
                 // Find tangents points from this agent to actual iteration neighbour
@@ -189,7 +189,7 @@ namespace AnticipatoryModel
             Vector2 BI = v_t2.normalized + v_t3.normalized;
 
             if (Vector2.Angle(v_t2, v_t3) < 5 ||
-                Vector2.Angle(v_t2, v_t3) > 90) return false;
+                Vector2.Angle(v_t2, v_t3) > 180) return false;
 
             Line tangent1;
             Vector2 I = GetExtremeTangentsIntersectionPoint(fl1, fl2, fr1, fr2, out tangent1);

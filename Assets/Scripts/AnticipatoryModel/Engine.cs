@@ -132,6 +132,7 @@ namespace AnticipatoryModel
         /// </summary>
         IEnumerator FrameDelayedUpdateGroupsRoutine()
         {
+            DetectingGroups();
             while (true)
             {
                 yield return new WaitForSeconds(moreDelayedTimeStep);

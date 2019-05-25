@@ -91,20 +91,11 @@ namespace AnticipatoryModel
                     || System.Math.Abs(bearingAngle - 360) < EPSILON
                     || System.Math.Abs(bearingAngle - 180) < EPSILON)
                 {
-                    turn = Random.Range(0, 11) > 5 ? -1 : 1;
+                    turn = Random.Range(0, 2) > 0 ? -1 : 1;
                 }
             }
 
-            else
-            {
-                if (bearingAngle >= 10 && bearingAngle < 170
-                    || bearingAngle >= 185 && bearingAngle < 350) turn = 1;
-                else
-                {
-                    if (bearingAngle < 180) turn = 1;
-                    else turn = -1;
-                }
-            }
+            else turn = 1;
 
             float w = 10 / (Mathf.Pow(ttc, 2) + 0.25f);
             return ExtensionMethods.RotateVector(velocity, turn * w);

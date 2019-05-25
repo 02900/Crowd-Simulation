@@ -112,9 +112,6 @@ namespace AnticipatoryModel
 
         public bool DoStep()
         {
-            if (debugLog) Debug.DrawRay(new Vector3(position.x, 1.5f, position.y),
-                new Vector3(velocity.x, 0, velocity.y), Color.magenta);
-
             Vector2 dir = goal - position;
             float distSqToGoal = dir.sqrMagnitude;
 
@@ -212,15 +209,13 @@ namespace AnticipatoryModel
                         if (!vAgents[i].Used)
                         {
                             vAgents[i].SetupAgent(gRad, gPos, gVel);
-
                             group_ttc.Add(vAgents[i].id, Global.TTC(position, velocity, radius,
-                                vAgents[i].position, vAgents[i].velocity, vAgents[i].radius));
+                                gPos, gVel, gRad));
 
-                            foreach (int neighborID in group)
-                                if (ttc.ContainsKey(neighborID) &&
-                                    ttc[neighborID] > group_ttc[vAgents[i].id])
-                                    ttc[neighborID] = Mathf.Infinity;
-
+                            foreach (int id in group)
+                                if (ttc.ContainsKey(id) &&
+                                    ttc[id] > group_ttc[vAgents[i].id])
+                                    ttc[id] = Mathf.Infinity;
                             break;
                         }
                     }
@@ -273,32 +268,32 @@ namespace AnticipatoryModel
 
         void ApplyStrategy()
         {
-            //float theta = 2 * Mathf.Atan(radius / Vector2.Distance(position, neighbor.position)) * Mathf.Rad2Deg;
+            if (neighbor.velocity.magnitude < 0.3f)
+            {
+                StaticObstacleCollision();
+            }
 
-            float vAngle = Vector2.Angle(velocity, neighbor.velocity);
-            if (System.Math.Abs(vAngle - 180) < thresholdCol) FrontCollision();
-            else if (System.Math.Abs(vAngle) < thresholdCol) RearCollision();
-            else LateralCollision();
+            else {
+                //float theta = 2 * Mathf.Atan(radius / Vector2.Distance(position, neighbor.position)) * Mathf.Rad2Deg;
+                float vAngle = Vector2.Angle(velocity, neighbor.velocity);
+                if (System.Math.Abs(vAngle - 180) < thresholdCol) FrontCollision();
+                else if (System.Math.Abs(vAngle) < thresholdCol) RearCollision();
+                else LateralCollision();
 
-            //if (debugLog)
-            //{
-            //    Vector2 VELA = ExtensionMethods.RotateVector(velocity, thresholdCol) * 4;
-            //    Vector2 VELB = ExtensionMethods.RotateVector(velocity, -thresholdCol) * 4;
-
-            //    //Vector2 VELA2 = ExtensionMethods.RotateVector(velocity, theta) * 8;
-            //    //Vector2 VELB2 = ExtensionMethods.RotateVector(velocity, -theta) * 8;
-
-            //    Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELA), Color.red);
-            //    Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELB), Color.red);
-
-            //    //Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELA2), Color.blue);
-            //    //Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELB2), Color.blue);
-
-            //    Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), -ExtensionMethods.Vector2ToVector3(VELA));
-            //    Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), -ExtensionMethods.Vector2ToVector3(VELB));
-
-            //    Debug.DrawRay(new Vector3(position.x, 2, position.y), ExtensionMethods.Vector2ToVector3(neighbor.velocity) * 4, Color.cyan);
-            //}
+                if (debugLog)
+                {
+                    Vector2 VELA = ExtensionMethods.RotateVector(velocity, thresholdCol) * 4;
+                    Vector2 VELB = ExtensionMethods.RotateVector(velocity, -thresholdCol) * 4;
+                    Debug.DrawRay(new Vector3(position.x, 2, position.y), ExtensionMethods.Vector2ToVector3(velocity), Color.blue);
+                    Debug.DrawRay(new Vector3(position.x, 2, position.y), ExtensionMethods.Vector2ToVector3(VELA), Color.red);
+                    Debug.DrawRay(new Vector3(position.x, 2, position.y), ExtensionMethods.Vector2ToVector3(VELB), Color.red);
+                    Debug.DrawRay(new Vector3(position.x, 2, position.y), ExtensionMethods.Vector2ToVector3(neighbor.velocity) * 4, Color.cyan);
+                    //Vector2 VELA2 = ExtensionMethods.RotateVector(velocity, theta) * 8;
+                    //Vector2 VELB2 = ExtensionMethods.RotateVector(velocity, -theta) * 8;
+                    //Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELA2), Color.blue);
+                    //Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELB2), Color.blue);
+                }
+            }
         }
 
         void FrontCollision()
@@ -324,7 +319,7 @@ namespace AnticipatoryModel
             if (bearingAngle <= 90 || bearingAngle > 270)
             {
                 if (debugLog) DebugCollisionType(1);
-                int[] s = { 1, 2 };
+                int[] s = { 4 };
                 DetermineStrategy(s);
             }
 
@@ -342,33 +337,28 @@ namespace AnticipatoryModel
         void LateralCollision()
         {
             if (debugLog) DebugCollisionType(3);
-            int[] s = { 1 };
+            int[] s = { 3 };
             DetermineStrategy(s, true);
+        }
+
+        void StaticObstacleCollision()
+        {
+            if (debugLog) DebugCollisionType(4);
+            int[] s = { 3 };
+            DetermineStrategy(s);
         }
 
         void DebugCollisionType(int i)
         {
+            string type = "???";
             switch (i) {
-                case 0:
-                    Debug.Log("Collision Between yo: " + id + " and" +
-                        " he: " + neighbor.id + ", its a Colision Front-Mutual");
-                    break;
-
-                case 1:
-                    Debug.Log("Collision Between yo: " + id + " and" +
-                        " he: " + neighbor.id + ", its a Colision Front-Only");
-                    break;
-
-                case 2:
-                    Debug.Log("Collision Between yo: " + id + " and" +
-                        " he: " + neighbor.id + ", its a Colision Back");
-                    break;
-
-                case 3:
-                    Debug.Log("Collision Between yo: " + id + " and" +
-                        " he: " + neighbor.id + ", its a Colision Lateral");
-                    break;
+                case 0: type = "Front-dual"; break;
+                case 1: type = "Front-only";  break;
+                case 2: type = "Back"; break;
+                case 3: type = "Lateral"; break;
+                case 4: type = "Static Obstacle"; break;
             }
+            Debug.Log("<" + id + ", " + neighbor.id + ">, " + type + " and itsVirtual is " + neighbor.IsVirtual);
         }
 
         void DetermineStrategy(int[] s, bool lateral = false)
