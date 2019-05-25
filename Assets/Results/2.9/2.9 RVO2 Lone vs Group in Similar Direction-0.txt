@@ -1,0 +1,5 @@
+Test 2.9/2.9 RVO2 Lone vs Group in Similar Direction
+Tiempo total 9.88
+Tiempo promedio 9.644614
+Distancia media 29.13787
+Energia cinetica media 303.0296

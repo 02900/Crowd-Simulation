@@ -1,0 +1,5 @@
+Test 1.3/1.3 AM Similar direction
+Tiempo total 13.41
+Tiempo promedio 10.95
+Distancia media 39.61227
+Energia cinetica media 525.4998

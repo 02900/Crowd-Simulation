@@ -1,0 +1,5 @@
+Test 2.8/2.8 RVO2 Lone vs Group
+Tiempo total 12.26
+Tiempo promedio 3.887692
+Distancia media 10.82557
+Energia cinetica media 283.1013

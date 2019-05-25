@@ -1,0 +1,5 @@
+Test 2.2/2.2 RVO2 Four agent crossing
+Tiempo total 9.86
+Tiempo promedio 8.19
+Distancia media 19.52202
+Energia cinetica media 234.8097

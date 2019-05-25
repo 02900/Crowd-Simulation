@@ -1,0 +1,5 @@
+Test 1.2/1.2 PL Crossing
+Tiempo total 3.89
+Tiempo promedio 3.85
+Distancia media 9.701159
+Energia cinetica media 214.239

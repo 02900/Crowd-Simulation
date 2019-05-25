@@ -1,0 +1,5 @@
+Test 2.3/2.3 SF Three way confusion
+Tiempo total 3.95
+Tiempo promedio 3.82
+Distancia media 9.534493
+Energia cinetica media 222.5927

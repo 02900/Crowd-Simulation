@@ -1,0 +1,5 @@
+Test 2.10/2.10 PL Oncoming-groups
+Tiempo total 34.55
+Tiempo promedio 23.81541
+Distancia media 10.98053
+Energia cinetica media 21.9869

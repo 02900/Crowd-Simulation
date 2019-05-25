@@ -1,0 +1,5 @@
+Test 2.4/2.4 AM Four way confusion
+Tiempo total 3.44
+Tiempo promedio 3.3625
+Distancia media 9.678927
+Energia cinetica media 277.5725

@@ -1,0 +1,5 @@
+Test 2.2/2.2 AM Four agent crossing
+Tiempo total 7.75
+Tiempo promedio 7.1625
+Distancia media 19.61036
+Energia cinetica media 261.3774

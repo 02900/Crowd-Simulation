@@ -1,0 +1,5 @@
+Test 2.4 SF Four way confusion
+Tiempo total 4.02
+Tiempo promedio 3.9025
+Distancia media 9.551942
+Energia cinetica media 226.2291

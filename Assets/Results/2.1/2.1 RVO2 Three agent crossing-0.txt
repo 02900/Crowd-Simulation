@@ -1,0 +1,5 @@
+Test 2.1/2.1 RVO2 Three agent crossing
+Tiempo total 11.49
+Tiempo promedio 8.176666
+Distancia media 19.52595
+Energia cinetica media 255.2603

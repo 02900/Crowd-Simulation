@@ -1,0 +1,5 @@
+Test 2.1/2.1 SF Three agent crossing
+Tiempo total 7.79
+Tiempo promedio 7.523333
+Distancia media 19.54
+Energia cinetica media 229.8302

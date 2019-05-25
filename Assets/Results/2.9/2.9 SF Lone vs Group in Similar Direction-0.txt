@@ -1,0 +1,5 @@
+Test 2.9/2.9 SF Lone vs Group in Similar Direction
+Tiempo total 10.87
+Tiempo promedio 10.23077
+Distancia media 29.35696
+Energia cinetica media 289.4803

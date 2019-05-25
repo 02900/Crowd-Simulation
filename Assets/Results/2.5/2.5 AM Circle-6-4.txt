@@ -1,0 +1,5 @@
+Test 2.5/2.5 AM Circle-6
+Tiempo total 4.33
+Tiempo promedio 4.12
+Distancia media 11.87384
+Energia cinetica media 282.4365

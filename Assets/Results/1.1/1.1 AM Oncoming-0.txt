@@ -1,0 +1,5 @@
+Test 1.1 AM Oncoming
+Tiempo total 7.79
+Tiempo promedio 7.69
+Distancia media 19.68965
+Energia cinetica media 240.7328

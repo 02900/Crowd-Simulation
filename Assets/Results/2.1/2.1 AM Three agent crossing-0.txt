@@ -1,0 +1,5 @@
+Test 2.1/2.1 AM Three agent crossing
+Tiempo total 6.85
+Tiempo promedio 6.77
+Distancia media 19.61657
+Energia cinetica media 284.3377

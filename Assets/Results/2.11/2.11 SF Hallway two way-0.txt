@@ -1,0 +1,5 @@
+Test 2.11/2.11 SF Hallway two way
+Tiempo total 9.469999
+Tiempo promedio 8.406563
+Distancia media 19.76413
+Energia cinetica media 201.0972

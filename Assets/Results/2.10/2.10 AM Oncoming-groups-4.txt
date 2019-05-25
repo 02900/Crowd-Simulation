@@ -1,0 +1,5 @@
+Test 2.10/2.10 AM Oncoming-groups
+Tiempo total 12.56
+Tiempo promedio 5.261666
+Distancia media 11.50279
+Energia cinetica media 212.3885

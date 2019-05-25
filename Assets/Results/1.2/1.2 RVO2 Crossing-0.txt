@@ -1,0 +1,5 @@
+Test 1.2/1.2 RVO2 Crossing
+Tiempo total 3.29
+Tiempo promedio 3.24
+Distancia media 9.541199
+Energia cinetica media 287.2296

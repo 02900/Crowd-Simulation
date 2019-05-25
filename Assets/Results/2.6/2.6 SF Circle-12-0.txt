@@ -1,0 +1,5 @@
+Test 2.6/2.6 SF Circle-12
+Tiempo total 6.12
+Tiempo promedio 6.050001
+Distancia media 15.61451
+Energia cinetica media 231.2907

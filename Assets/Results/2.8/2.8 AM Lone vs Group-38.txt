@@ -1,0 +1,5 @@
+Test 2.8/2.8 AM Lone vs Group
+Tiempo total 4.02
+Tiempo promedio 3.461539
+Distancia media 10.30693
+Energia cinetica media 294.7936

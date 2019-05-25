@@ -1,0 +1,5 @@
+Test 1.2 SF Crossing
+Tiempo total 4.11
+Tiempo promedio 4.09
+Distancia media 9.653008
+Energia cinetica media 179.5103

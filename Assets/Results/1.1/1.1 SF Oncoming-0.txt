@@ -1,0 +1,5 @@
+Test 1.1 SF Oncoming
+Tiempo total 8
+Tiempo promedio 7.98
+Distancia media 19.51821
+Energia cinetica media 203.4804

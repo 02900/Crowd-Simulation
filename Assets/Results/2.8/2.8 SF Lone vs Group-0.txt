@@ -1,0 +1,5 @@
+Test 2.8/2.8 SF Lone vs Group
+Tiempo total 3.96
+Tiempo promedio 3.698461
+Distancia media 9.555012
+Energia cinetica media 240.7208

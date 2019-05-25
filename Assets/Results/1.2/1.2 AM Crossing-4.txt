@@ -1,0 +1,5 @@
+Test 1.2/1.2 AM Crossing
+Tiempo total 3.6
+Tiempo promedio 3.575
+Distancia media 9.78816
+Energia cinetica media 240.1482

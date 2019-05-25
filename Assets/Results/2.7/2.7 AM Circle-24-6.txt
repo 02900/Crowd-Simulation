@@ -1,0 +1,5 @@
+Test 2.7/2.7 AM Circle-24
+Tiempo total 7.08
+Tiempo promedio 6.271249
+Distancia media 17.18812
+Energia cinetica media 261.8317

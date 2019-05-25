@@ -1,0 +1,5 @@
+Test 2.7/2.7 SF Circle-24
+Tiempo total 6.28
+Tiempo promedio 6.123333
+Distancia media 15.70689
+Energia cinetica media 228.0449

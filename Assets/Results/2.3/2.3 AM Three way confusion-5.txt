@@ -1,0 +1,5 @@
+Test 2.3/2.3 AM Three way confusion
+Tiempo total 3.5
+Tiempo promedio 3.343333
+Distancia media 9.577046
+Energia cinetica media 277.7475

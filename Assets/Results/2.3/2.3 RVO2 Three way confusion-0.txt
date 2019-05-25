@@ -1,0 +1,5 @@
+Test 2.3/2.3 RVO2 Three way confusion
+Tiempo total 15.74
+Tiempo promedio 15.6
+Distancia media 9.650585
+Energia cinetica media 38.00483

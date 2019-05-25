@@ -1,0 +1,5 @@
+Test 2.2/2.2 PL Four agent crossing
+Tiempo total 7.42
+Tiempo promedio 7.3175
+Distancia media 19.96696
+Energia cinetica media 247.4407

@@ -1,0 +1,5 @@
+Test 2.6/2.6 PL Circle-12
+Tiempo total 7.05
+Tiempo promedio 6.3225
+Distancia media 15.73464
+Energia cinetica media 216.3192

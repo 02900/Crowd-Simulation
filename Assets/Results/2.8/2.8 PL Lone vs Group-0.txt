@@ -1,0 +1,5 @@
+Test 2.8/2.8 PL Lone vs Group
+Tiempo total 4.99
+Tiempo promedio 4.348462
+Distancia media 9.553824
+Energia cinetica media 186.7938

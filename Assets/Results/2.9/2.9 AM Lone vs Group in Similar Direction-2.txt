@@ -1,0 +1,5 @@
+Test 2.9/2.9 AM Lone vs Group in Similar Direction
+Tiempo total 12.97
+Tiempo promedio 10.00538
+Distancia media 29.51874
+Energia cinetica media 342.5176

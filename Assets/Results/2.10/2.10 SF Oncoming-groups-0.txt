@@ -1,0 +1,5 @@
+Test 2.10/2.10 SF Oncoming-groups
+Tiempo total 11.16
+Tiempo promedio 4.969583
+Distancia media 10.05994
+Energia cinetica media 170.6329

@@ -1,0 +1,5 @@
+Test 2.9/2.9 PL Lone vs Group in Similar Direction
+Tiempo total 10.65
+Tiempo promedio 10.01231
+Distancia media 29.14199
+Energia cinetica media 323.1924

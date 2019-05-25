@@ -1,0 +1,5 @@
+Test 2.10/2.10 RVO2 Oncoming-groups
+Tiempo total 3.27
+Tiempo promedio 3.227499
+Distancia media 9.563524
+Energia cinetica media 290.2265

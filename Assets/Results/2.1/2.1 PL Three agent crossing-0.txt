@@ -1,0 +1,5 @@
+Test 2.1/2.1 PL Three agent crossing
+Tiempo total 7.72
+Tiempo promedio 7.449999
+Distancia media 20.04677
+Energia cinetica media 248.1456
