@@ -320,6 +320,8 @@ namespace AnticipatoryModel
             {
                 if (debugLog) DebugCollisionType(1);
                 int[] s = { 4 };
+
+                //if (neighbor.velocity.sqrMagnitude < 1) s = new int[] { 1 };
                 DetermineStrategy(s);
             }
 
@@ -328,8 +330,7 @@ namespace AnticipatoryModel
             else
             {
                 if (debugLog) DebugCollisionType(2);
-                int[] s = { 3 };
-                if (neighbor.velocity.sqrMagnitude < 1) s = new int[] { 1 };
+                int[] s = { 1, 3 };
                 DetermineStrategy(s);
             }
         }
