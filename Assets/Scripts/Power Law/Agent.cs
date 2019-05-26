@@ -25,7 +25,7 @@ namespace PowerLaw
     {
         const float EPSILON = 0.02f;
         const float goalRadius = 0.5f;
-        const float maxAccel = 100;
+        const float maxAccel = 23;
         private int id;                                                       // The id of the character. 
         private Vector2 position;                                             // The position of the character. 
         private Vector2 velocity;                                             // The velocity of the character. 
@@ -81,13 +81,13 @@ namespace PowerLaw
         {
             this.id = id;
 
-            k = 40f;
-            ksi = 0.54f;
-            m = 2.0f;
-            t0 = 3.0f;
-            neighborDist = 10;
+            k = 1.5f;
+            ksi = 0.91f;
+            m = 2.4f;
+            t0 = 4.47f;
+            neighborDist = 11.6f;
             radius = 0.25f;
-            prefSpeed = 3f;
+            prefSpeed = 1.5f;
 
             //gaussian distributed speed
             float u;
@@ -136,7 +136,6 @@ namespace PowerLaw
 
             // compute preferred velocity
             vPref *= prefSpeed / Mathf.Sqrt(distSqToGoal);
-
             // compute the new velocity of the agent
             ComputeForces();
 
@@ -151,12 +150,9 @@ namespace PowerLaw
             //}
 
             position += velocity * Engine.timeStep;
-
             // notify proximity database that our position has changed
             proximityToken.UpdateForNewPosition(ExtensionMethods.Vector2ToVector3(position));
-
             MoveInRealWorld();
-
             return false;
         }
 

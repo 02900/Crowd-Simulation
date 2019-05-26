@@ -8,8 +8,8 @@ namespace AnticipatoryModel
     {
         public int id { get; set; }
         public float radius { get; set; }
-        public Vector2 position;
-        public Vector2 velocity;
+        [HideInInspector] public Vector2 position;
+        [HideInInspector] public Vector2 velocity;
 
         protected bool isVirtual;
         public bool IsVirtual { get { return isVirtual; } }

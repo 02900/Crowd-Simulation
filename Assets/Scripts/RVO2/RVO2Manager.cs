@@ -142,7 +142,7 @@ namespace RVO2
                 yield return new WaitForSeconds(moreDelayedTimeStep);
                 if (!results.loadRec && Input.GetKey(KeyCode.Z))
                 {
-                    for (int i = 0; i < agents.Length; i++)
+                    for (int i = 0; i < agents.Length && results.record; i++)
                     {
                         vel = Simulator.Instance.getAgentVelocity(i);
                         if (!finish[i])
@@ -171,12 +171,12 @@ namespace RVO2
 
                 for (int i = 0; i < agents.Length; i++)
                 {
-                    results.RecordStep(GetPosition(i), GetVelocity(i));
+                    if (results.record) results.RecordStep(GetPosition(i), GetVelocity(i));
                     if (finish[i]) continue;
 
                     agents[i].MoveInRealWorld(GetPosition(i), GetVelocity(i));
 
-                    if (GetVelocity(i) != Vector2.zero)
+                    if (results.record && GetVelocity(i) != Vector2.zero)
                     {
                         float dstChange = Vector2.Distance(prevPos[i], GetPosition(i));
                         DST_TRAVEL[i] += dstChange;
@@ -186,9 +186,11 @@ namespace RVO2
 
                     if (finish[i])
                     {
-                        TIME_TRAVEL[i] = framesCount * timeStep;
-                        EKinematic[i] /= framesCountDelayed;
-                        AddAgentStat(TIME_TRAVEL[i], DST_TRAVEL[i]);
+                        if (results.record) {
+                            TIME_TRAVEL[i] = framesCount * timeStep;
+                            EKinematic[i] /= framesCountDelayed;
+                            AddAgentStat(TIME_TRAVEL[i], DST_TRAVEL[i]);
+                        }
                         agents[i].ResetAnimParameters(GetVelocity(i), GetPrefSpeed(i), true);
                     }
                 }

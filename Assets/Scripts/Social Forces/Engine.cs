@@ -111,7 +111,7 @@ namespace SocialForces
                 yield return new WaitForSeconds(moreDelayedTimeStep);
                 if (!results.loadRec && Input.GetKey(KeyCode.Z))
                 {
-                    for (int i = 0; i < agents.Length; i++)
+                    for (int i = 0; i < agents.Length && results.record; i++)
                     {
                         if (agents[i].Velocity != Vector2.zero)
                             EKinematic[i] += mass_half * agents[i].Velocity.sqrMagnitude;
@@ -133,21 +133,23 @@ namespace SocialForces
                 Vector2 prevPos;
                 for (int i = 0; i < agents.Length; i++)
                 {
-                    results.RecordStep(Agents[i].Position, Agents[i].Velocity);
+                    if (results.record) results.RecordStep(Agents[i].Position, Agents[i].Velocity);
                     if (finish[i]) continue;
                     prevPos = agents[i].Position;
                     finish[i] = agents[i].DoStep();
 
-                    if (agents[i].Velocity != Vector2.zero)
+                    if (results.record && agents[i].Velocity != Vector2.zero)
                     {
                         float dstChange = Vector2.Distance(prevPos, agents[i].Position);
                         DST_TRAVEL[i] += dstChange;
                     }
 
                     if (finish[i]) {
-                        TIME_TRAVEL[i] = framesCount * timeStep;
-                        EKinematic[i] /= framesCountDelayed;
-                        AddAgentStat(TIME_TRAVEL[i], DST_TRAVEL[i]);
+                        if (results.record) {
+                            TIME_TRAVEL[i] = framesCount * timeStep;
+                            EKinematic[i] /= framesCountDelayed;
+                            AddAgentStat(TIME_TRAVEL[i], DST_TRAVEL[i]);
+                        }
                         agents[i].ResetAnimParameters(true);
                     }
                 }

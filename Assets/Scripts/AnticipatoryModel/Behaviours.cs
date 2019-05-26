@@ -6,8 +6,8 @@ namespace AnticipatoryModel
     public static class Behaviours
     {
         const float EPSILON = 0.02f;
-        const float maxAcc = 1000;
-        const float k = 2.5f;  // k is a tunable parameter that controls the strength of the goal force
+        const float maxAcc = 150;
+        const float k = 27f;  // k is a tunable parameter that controls the strength of the goal force
 
         /// Only move to goal direction with vpref
         public static Vector2 GetSteering(Vector2 position, Vector2 goal, float prefSpeed)
@@ -48,7 +48,7 @@ namespace AnticipatoryModel
                 FAvoid.Normalize();
 
                 // Force Magnitude
-                if (t >= 0 && t <= tH) k = (tH - t) / t + 0.1f;
+                if (t >= 0 && t <= tH) k = (tH - t) / (t*t + 0.1f);
                 acceleration += FAvoid * Mathf.Clamp(k, 0, maxAcc);
             }
             return acceleration;
@@ -77,27 +77,23 @@ namespace AnticipatoryModel
         }
 
         public static Vector2 ChangeDirectionStrategy(Vector2 velocity, Vector2 dir,
-            bool lateral, float ttc, bool debug)
+            bool lateral, float ttc, float tH)
         {
-            // dir equal 1 is left, -1 is right
+            // dir: 1 is left, -1 is right
             float bearingAngle = BearingAngle(velocity, dir), turn;
 
-            if (!lateral)
-            {
-                if (bearingAngle < 180) turn = 1;
-                else turn = -1;
+            if (bearingAngle < 180) turn = 1;
+            else turn = -1;
 
-                if (System.Math.Abs(bearingAngle) < EPSILON
-                    || System.Math.Abs(bearingAngle - 360) < EPSILON
-                    || System.Math.Abs(bearingAngle - 180) < EPSILON)
-                {
-                    turn = Random.Range(0, 2) > 0 ? -1 : 1;
-                }
+            if (System.Math.Abs(bearingAngle) < EPSILON
+                || System.Math.Abs(bearingAngle - 360) < EPSILON
+                || System.Math.Abs(bearingAngle - 180) < EPSILON)
+            {
+                turn = Random.Range(0, 2) > 0 ? -1 : 1;
             }
 
-            else turn = 1;
-
-            float w = 10 / (Mathf.Pow(ttc, 2) + 0.25f);
+            if (lateral) turn = 1;
+            float w = (10 + tH - ttc) / (Mathf.Pow(ttc, 2) + 0.25f);
             return ExtensionMethods.RotateVector(velocity, turn * w);
         }
 

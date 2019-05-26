@@ -21,9 +21,6 @@ namespace AnticipatoryModel
         float viewAngle = 135;
         float personalSpace = 3;
 
-        public LayerMask targetMask;
-        public LayerMask obstacleMask;
-
         [SerializeField] bool debugLog = false;
         [SerializeField] bool debugGroups = false;
         [SerializeField] bool useGroups = false;
@@ -175,6 +172,7 @@ namespace AnticipatoryModel
                 if (Groups.PercivingGroups(position, goal - position, radius,
                     group, ttc, out gPos, out gVel, out gRad, debugGroups))
                 {
+                    gRad+=0.25f;
                     var vAgents = Engine.Instance.VirtualAgents;
                     for (int i = 0; i < vAgents.Length; i++)
                     {
@@ -286,15 +284,13 @@ namespace AnticipatoryModel
         void RearCollision()
         {
             float bearingAngle = Behaviours.BearingAngle(velocity, neighbor.position - position);
-
+            int[] s;
             // Front
             if (bearingAngle <= 90 || bearingAngle > 270)
             {
                 if (debugLog) DebugCollisionType(1);
-                int[] s = { 4 };
-
+                s = new []{ 1 };
                 //if (neighbor.velocity.sqrMagnitude < 1) s = new int[] { 1 };
-                DetermineStrategy(s);
             }
 
             // Back
@@ -302,16 +298,17 @@ namespace AnticipatoryModel
             else
             {
                 if (debugLog) DebugCollisionType(2);
-                int[] s = { 1, 3 };
-                DetermineStrategy(s);
+                s = new[] { 4 };
             }
+            DetermineStrategy(s);
         }
 
         void LateralCollision()
         {
             if (debugLog) DebugCollisionType(3);
-            int[] s = { 3 };
-            DetermineStrategy(s, true);
+            float bearingAngle = Behaviours.BearingAngle(velocity, neighbor.position - position);
+            int[] s = new[] { 3 };
+            DetermineStrategy(s);
         }
 
         void StaticObstacleCollision()
@@ -364,7 +361,7 @@ namespace AnticipatoryModel
                 case strategies.CH:
                     velocity = Behaviours.GetSteering(position, goal, prefSpeed);
                     velocity = Behaviours.ChangeDirectionStrategy(velocity,
-                        neighbor.position - position, lateral, min_ttc, debugLog);
+                        neighbor.position - position, lateral, min_ttc, timeHorizon);
                     break;
 
                 case strategies.F:

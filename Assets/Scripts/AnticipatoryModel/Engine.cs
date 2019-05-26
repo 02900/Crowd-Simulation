@@ -195,7 +195,6 @@ namespace AnticipatoryModel
             }
 
             else if (playingRec) {
-
                 for (int i = 0; i < Agents.Length && !results.EndStream(); i++)
                 {
                     if (!results.EndStream()) {
