@@ -12,13 +12,12 @@ namespace AnticipatoryModel
     
         #region definition of agent
         float prefSpeed;               // The max speed of the  
-        float prefSpeedCache;               // The max speed of the  
         float timeHorizon;             // given a certain time tH, the agent will ignore any 
                                       // collisions that will happen more than tH seconds from now
 
         // Field Of View
         float neighborDist;
-        float viewAngle = 135;
+        float viewAngle = 180;
         float personalSpace = 3;
 
         [SerializeField] bool debugLog = false;
@@ -83,7 +82,6 @@ namespace AnticipatoryModel
             }
 
             if (System.Math.Abs(fixedPrefSpeed) > EPSILON) prefSpeed = fixedPrefSpeed;
-            prefSpeedCache = prefSpeed;
         }
 
         public void Init(int id, Vector2 position, Vector2 goal)
@@ -100,8 +98,8 @@ namespace AnticipatoryModel
             this. goal = goal;
             radius = 0.25f;
             prefSpeed = 3 + Mathf.Abs(rnd);
-            timeHorizon = Random.Range(3.0f, 8.0f);
-            neighborDist = Random.Range(8.0f, 12.0f);
+            timeHorizon = 10;
+            neighborDist = 15;
 
             duration = Random.Range(1.5f, 3.0f);
 			cacheDuration = duration;
@@ -172,7 +170,7 @@ namespace AnticipatoryModel
                 if (Groups.PercivingGroups(position, goal - position, radius,
                     group, ttc, out gPos, out gVel, out gRad, debugGroups))
                 {
-                    gRad+=0.25f;
+                    gRad+=0.4f;
                     var vAgents = Engine.Instance.VirtualAgents;
                     for (int i = 0; i < vAgents.Length; i++)
                     {
@@ -197,10 +195,10 @@ namespace AnticipatoryModel
         {
             curStrategy = strategies.NULL;
             duration = cacheDuration;
-            prefSpeed = prefSpeedCache;
-        }
+            TurnTo = 0;
+    }
 
-        void Evaluate()
+    void Evaluate()
         {
             duration -= Engine.timeStep;
             if (duration <= 0) ResetStrategy();
@@ -306,15 +304,14 @@ namespace AnticipatoryModel
         void LateralCollision()
         {
             if (debugLog) DebugCollisionType(3);
-            float bearingAngle = Behaviours.BearingAngle(velocity, neighbor.position - position);
-            int[] s = new[] { 3 };
+            int[] s = new[] { 1 };
             DetermineStrategy(s);
         }
 
         void StaticObstacleCollision()
         {
             if (debugLog) DebugCollisionType(4);
-            int[] s = { 3 };
+            int[] s = { 1 };
             DetermineStrategy(s);
         }
 
@@ -359,9 +356,11 @@ namespace AnticipatoryModel
                     break;
 
                 case strategies.CH:
+                    int turnTo;
                     velocity = Behaviours.GetSteering(position, goal, prefSpeed);
                     velocity = Behaviours.ChangeDirectionStrategy(velocity,
-                        neighbor.position - position, lateral, min_ttc, timeHorizon);
+                        neighbor.position - position, lateral, min_ttc, timeHorizon, neighbor.TurnTo, out turnTo);
+                    TurnTo = turnTo;
                     break;
 
                 case strategies.F:

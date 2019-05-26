@@ -11,6 +11,10 @@ namespace AnticipatoryModel
         [HideInInspector] public Vector2 position;
         [HideInInspector] public Vector2 velocity;
 
+        // dir: 1 is left, -1 is right
+        int turnTo = 0;
+        public int TurnTo { get { return turnTo; } set { turnTo = value; } }
+
         protected bool isVirtual;
         public bool IsVirtual { get { return isVirtual; } }
 

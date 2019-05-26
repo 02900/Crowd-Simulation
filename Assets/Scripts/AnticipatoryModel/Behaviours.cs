@@ -6,8 +6,8 @@ namespace AnticipatoryModel
     public static class Behaviours
     {
         const float EPSILON = 0.02f;
-        const float maxAcc = 150;
-        const float k = 27f;  // k is a tunable parameter that controls the strength of the goal force
+        const float maxAcc = 250;
+        const float k = 36f;  // k is a tunable parameter that controls the strength of the goal force
 
         /// Only move to goal direction with vpref
         public static Vector2 GetSteering(Vector2 position, Vector2 goal, float prefSpeed)
@@ -77,11 +77,11 @@ namespace AnticipatoryModel
         }
 
         public static Vector2 ChangeDirectionStrategy(Vector2 velocity, Vector2 dir,
-            bool lateral, float ttc, float tH)
+            bool lateral, float ttc, float tH, int TurnOfNeighbor, out int turn)
         {
-            // dir: 1 is left, -1 is right
-            float bearingAngle = BearingAngle(velocity, dir), turn;
-
+            // turn: 1 is left, -1 is right
+            float bearingAngle = BearingAngle(velocity, dir);
+            
             if (bearingAngle < 180) turn = 1;
             else turn = -1;
 
@@ -92,8 +92,9 @@ namespace AnticipatoryModel
                 turn = Random.Range(0, 2) > 0 ? -1 : 1;
             }
 
-            if (lateral) turn = 1;
-            float w = (10 + tH - ttc) / (Mathf.Pow(ttc, 2) + 0.25f);
+            if (TurnOfNeighbor != 0) turn = TurnOfNeighbor;
+
+            float w = (10 + tH - ttc) / (Mathf.Pow(ttc, 2) + 0.1f);
             return ExtensionMethods.RotateVector(velocity, turn * w);
         }
 

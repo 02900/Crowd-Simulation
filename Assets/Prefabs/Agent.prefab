@@ -1353,7 +1353,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1008424010228714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4491587100219296}
@@ -2576,12 +2576,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 1024
   debugLog: 0
   debugGroups: 0
   useGroups: 1

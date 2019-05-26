@@ -113,7 +113,7 @@ namespace AnticipatoryModel
                 {
                     v3_t1 = new Vector3(points[i].Item1.x, 1.5f, points[i].Item1.y);
                     v3_t2 = new Vector3(points[i].Item2.x, 1.5f, points[i].Item2.y);
-                    Debug.DrawLine(v3_t1, v3_t2, Color.blue);
+                    Debug.DrawLine(v3_t1, v3_t2, new Color(1, 1, 1, 0.4f));
                 }
 
                 // Vector que va desde este agente hasta punto tangente
@@ -225,9 +225,9 @@ namespace AnticipatoryModel
             if (debug)
             {
                 DrawCircle(0.1f, I);
-                Debug.DrawRay(new Vector3(I.x, 1.5f, I.y), new Vector3(v_t2.x, 0, v_t2.y), Color.gray);
-                Debug.DrawRay(new Vector3(I.x, 1.5f, I.y), new Vector3(v_t3.x, 0, v_t3.y), Color.gray);
-                Debug.DrawRay(new Vector3(I.x, 1.5f, I.y), new Vector3(BI.x, 0, BI.y), Color.green);
+                Debug.DrawRay(new Vector3(I.x, 1.5f, I.y), new Vector3(v_t2.x, 0, v_t2.y), Color.white);
+                Debug.DrawRay(new Vector3(I.x, 1.5f, I.y), new Vector3(v_t3.x, 0, v_t3.y), Color.white);
+                Debug.DrawRay(new Vector3(I.x, 1.5f, I.y), new Vector3(BI.x, 0, BI.y), new Color(1, 0.92f, 0.016f, 0.7f));
 
                 // Another way to paintarlo
                 //Debug.DrawLine(new Vector3(I.x, 1.5f, I.y), new Vector3(fl2.x, 1.5f, fl2.y));
