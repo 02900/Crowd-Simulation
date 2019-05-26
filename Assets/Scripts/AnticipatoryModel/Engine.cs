@@ -175,10 +175,10 @@ namespace AnticipatoryModel
                     prevPos = agents[i].position;
                     finish[i] = agents[i].DoStep();
 
-                    if (agents[i].velocity != Vector2.zero)
+                    if (results.record && agents[i].velocity != Vector2.zero)
                     {
                         float dstChange = Vector2.Distance(prevPos, agents[i].position);
-                        if (results.record) DST_TRAVEL[i] += dstChange;
+                        DST_TRAVEL[i] += dstChange;
                     }
 
                     if (finish[i])

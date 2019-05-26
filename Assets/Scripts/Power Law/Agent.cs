@@ -25,7 +25,7 @@ namespace PowerLaw
     {
         const float EPSILON = 0.02f;
         const float goalRadius = 0.5f;
-        const float maxAccel = 1000;
+        const float maxAccel = 100;
         private int id;                                                       // The id of the character. 
         private Vector2 position;                                             // The position of the character. 
         private Vector2 velocity;                                             // The velocity of the character. 
@@ -85,7 +85,7 @@ namespace PowerLaw
             ksi = 0.54f;
             m = 2.0f;
             t0 = 3.0f;
-            neighborDist = 80.0f;
+            neighborDist = 10;
             radius = 0.25f;
             prefSpeed = 3f;
 
@@ -104,7 +104,7 @@ namespace PowerLaw
             proximityToken = Engine.Instance.GetSpatialDatabase.AllocateToken(this);
 
             // Notify proximity database that our position has changed
-            proximityToken.UpdateForNewPosition(position);
+            proximityToken.UpdateForNewPosition(ExtensionMethods.Vector2ToVector3(position));
         }
 
         void Start()
@@ -153,7 +153,7 @@ namespace PowerLaw
             position += velocity * Engine.timeStep;
 
             // notify proximity database that our position has changed
-            proximityToken.UpdateForNewPosition(position);
+            proximityToken.UpdateForNewPosition(ExtensionMethods.Vector2ToVector3(position));
 
             MoveInRealWorld();
 
@@ -194,16 +194,17 @@ namespace PowerLaw
 
             // Compute new neighbors of agent;
             proximityNeighbors.Clear();
-            Vector3 center = new Vector3(position.x, 0, position.y);
-            proximityToken.FindNeighbors(center, neighborDist, ref proximityNeighbors);
+            proximityToken.FindNeighbors(ExtensionMethods.Vector2ToVector3(position), neighborDist, ref proximityNeighbors);
 
             // compute the anticipatory force from each neighbor
-            for (int i = 0; i < proximityNeighbors.Count; ++i)
+            for (int i = 0; i < proximityNeighbors.Count; i++)
             {
                 Agent other = (Agent)proximityNeighbors[i];
+                if (id == other.id) continue;
+
                 float distanceSq = (other.position - position).sqrMagnitude;
                 float radiusSq = Mathf.Sqrt(other.radius + radius);
-                if (this != other && System.Math.Abs(distanceSq - radiusSq) > EPSILON)
+                if (System.Math.Abs(distanceSq - radiusSq) > EPSILON)
                 {
                     // if agents are actually colliding use their separation distance 
                     if (distanceSq < radiusSq)
@@ -341,10 +342,8 @@ namespace PowerLaw
         void MoveInRealWorld()
         {
             ColorSpeed();
-
             transform.localPosition = new Vector3(position.x, 0, position.y);
             float distanceToTarget = Vector3.Distance(goal3d, transform.localPosition);
-
             Move(ExtensionMethods.Vector2ToVector3(velocity.normalized));
 
             // Agent is within one radius of its goal then go to next waypoint

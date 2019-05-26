@@ -56,7 +56,7 @@ namespace PowerLaw
 
         void Awake(){
             Instance = this;
-            spatialDatabase = new LQProximityDatabase(new Vector3(), new Vector3(500, 0, 500), new Vector3(10.0f, 0, 10.0f));
+            spatialDatabase = new LQProximityDatabase(Vector3.zero, new Vector3(500, 0, 500), new Vector3(10, 0, 10));
             CreateAgents();
             results = FindObjectOfType<HandleTextFile>();
         }
@@ -101,8 +101,28 @@ namespace PowerLaw
 
         void Start()
         {
-            StartCoroutine(FrameMoreDelayedUpdateRoutine());
             StartCoroutine(FrameDelayedUpdateRoutine());
+            StartCoroutine(FrameMoreDelayedUpdateRoutine());
+        }
+
+        /// <summary>
+        /// A loop which executes logic after waiting for an amount of frames to pass.
+        /// </summary>
+        IEnumerator FrameMoreDelayedUpdateRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(moreDelayedTimeStep);
+                if (!results.loadRec && Input.GetKey(KeyCode.Z))
+                {
+                    for (int i = 0; i < agents.Length && results.record; i++)
+                    {
+                        if (agents[i].Velocity != Vector2.zero)
+                            EKinematic[i] += mass_half * agents[i].Velocity.sqrMagnitude;
+                    }
+                    framesCountDelayed++;
+                }
+            }
         }
 
         /// <summary>
@@ -120,26 +140,6 @@ namespace PowerLaw
         }
 
         /// <summary>
-        /// A loop which executes logic after waiting for an amount of frames to pass.
-        /// </summary>
-        IEnumerator FrameMoreDelayedUpdateRoutine()
-        {
-            while (true)
-            {
-                yield return new WaitForSeconds(moreDelayedTimeStep);
-                if (!results.loadRec && Input.GetKey(KeyCode.Z))
-                {
-                    for (int i = 0; i < agents.Length; i++)
-                    {
-                        if (agents[i].Velocity != Vector2.zero)
-                            EKinematic[i] += mass_half * agents[i].Velocity.sqrMagnitude;
-                    }
-                    framesCountDelayed++;
-                }
-            }
-        }
-
-        /// <summary>
         /// Performs a simulation/integration step i.e. updates the acceleration, 
         /// velocity and position of the simulated characters.
         /// </summary>
@@ -153,12 +153,12 @@ namespace PowerLaw
 
                 for (int i = 0; i < agents.Length; i++)
                 {
-                    results.RecordStep(agents[i].Position, agents[i].Velocity);
+                    if (results.record) results.RecordStep(agents[i].Position, agents[i].Velocity);
                     if (finish[i]) continue;
                     prevPos = agents[i].Position;
                     finish[i] = agents[i].DoStep();
 
-                    if (agents[i].Velocity != Vector2.zero)
+                    if (results.record && agents[i].Velocity != Vector2.zero)
                     {
                         float dstChange = Vector2.Distance(prevPos, agents[i].Position);
                         DST_TRAVEL[i] += dstChange;
@@ -166,10 +166,13 @@ namespace PowerLaw
 
                     if (finish[i])
                     {
-                        TIME_TRAVEL[i] = framesCount * timeStep;
-                        EKinematic[i] /= framesCountDelayed;
-                        AddAgentStat(TIME_TRAVEL[i], DST_TRAVEL[i]);
+                        if (results.record) {
+                            TIME_TRAVEL[i] = framesCount * timeStep;
+                            EKinematic[i] /= framesCountDelayed;
+                            AddAgentStat(TIME_TRAVEL[i], DST_TRAVEL[i]);
+                        }
                         agents[i].ResetAnimParameters(true);
+
                     }
                 }
             }

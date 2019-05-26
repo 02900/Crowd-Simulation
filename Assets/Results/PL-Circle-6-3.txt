@@ -1,0 +1,5 @@
+Test PL-Circle-6
+Tiempo total 9.6
+Tiempo promedio 8.933333
+Distancia media 11.82667
+Energia cinetica media 62.2321
