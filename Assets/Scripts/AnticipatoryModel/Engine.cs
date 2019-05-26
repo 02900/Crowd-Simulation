@@ -9,15 +9,15 @@ namespace AnticipatoryModel
     {
         public static Engine Instance;
         public const float timeStep = 0.01f;
-        const float moreDelayedTimeStep = 0.2f;
+        const float moreDelayedTimeStep = 0.5f;
         const float mass_half = 33;
         float framesCount;
         float framesCountDelayed;
 
         #region Groups
         const float ed = 1.85f;               // distance        
-        const float ev = 2.0f;                // velocity
-        const float eav = 10;                 // angle
+        const float ev = 1.5f;                // velocity
+        const float eav = 15;                 // angle
         #endregion
 
         AMAgent[] agents;

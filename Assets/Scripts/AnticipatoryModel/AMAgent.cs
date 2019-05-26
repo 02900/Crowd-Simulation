@@ -248,15 +248,7 @@ namespace AnticipatoryModel
         void FrontCollision()
         {
             if (debugLog) DebugCollisionType(0);
-
-            int[] s = { 3 };
-
-            if (min_ttc < 3)
-                s = new[] { 3 };
-
-            if (neighbor.IsVirtual || 
-                neighbor.velocity.sqrMagnitude < prefSpeed) s = new[] { 3 };
-
+            int[] s = { 1 };
             DetermineStrategy(s, true);
         }
 
@@ -268,8 +260,8 @@ namespace AnticipatoryModel
             if (bearingAngle <= 90 || bearingAngle > 270)
             {
                 if (debugLog) DebugCollisionType(1);
-                s = new []{ 1 };
-                //if (neighbor.velocity.sqrMagnitude < 1) s = new int[] { 1 };
+                s = new []{ 1, 2 };
+                if (neighbor.velocity.sqrMagnitude < 1 ) s = new int[] { 1 };
             }
 
             // Back
@@ -277,7 +269,7 @@ namespace AnticipatoryModel
             else
             {
                 if (debugLog) DebugCollisionType(2);
-                s = new[] { 4 };
+                s = new[] { 1 };
             }
 
             DetermineStrategy(s);

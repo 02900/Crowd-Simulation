@@ -97,11 +97,10 @@ namespace AnticipatoryModel
             return ExtensionMethods.RotateVector(velocity, turn * w);
         }
 
-        public static Vector2 DecelerationStrategy(float ttc, Vector2 velocity)
+        public static Vector2 DecelerationStrategy(float t, Vector2 velocity)
         {
-            float k = ttc < 2 ? 2 : ttc;
-            k = Mathf.Exp(-0.15f * k * k);
-            return velocity * (1 - k);
+            t = Mathf.Exp(-0.5f * t * t);
+            return velocity * (1 - t);
         }
     }
 }
