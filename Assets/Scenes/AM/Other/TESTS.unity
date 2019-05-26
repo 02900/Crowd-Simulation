@@ -234,7 +234,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1001 &215350833
 Prefab:
@@ -439,7 +438,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &412544098
 GameObject:
@@ -484,7 +482,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &432475558
 GameObject:
@@ -529,7 +526,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1001 &449354160
 Prefab:
@@ -618,7 +614,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.56
+      value: 2.83
       objectReference: {fileID: 0}
     - target: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.y
@@ -889,7 +885,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &651731372
 GameObject:
@@ -1118,7 +1113,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1085932155
 GameObject:
@@ -1163,7 +1157,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1001 &1238648871
 Prefab:
@@ -1286,7 +1279,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1001 &1340704073
 Prefab:
@@ -1492,7 +1484,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1785503788
 GameObject:
@@ -1933,5 +1924,4 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1

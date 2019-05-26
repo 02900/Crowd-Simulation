@@ -15,14 +15,10 @@ namespace AnticipatoryModel
         float timeHorizon;             // given a certain time tH, the agent will ignore any 
                                       // collisions that will happen more than tH seconds from now
 
-        // Field Of View
         float neighborDist;
         float viewAngle = 180;
         float personalSpace = 3;
-
-        [SerializeField] bool debugLog = false;
-        [SerializeField] bool debugGroups = false;
-        [SerializeField] bool useGroups = false;
+        const float thresholdCol = 15;
         #endregion
 
         #region state of agent
@@ -35,17 +31,11 @@ namespace AnticipatoryModel
         #endregion
 
         #region eval strategy
-        int cur_low_ttc;
-        const float ttc_umbral = 1;
-        const int MAX_INMINENT_COLISION = 7;
-        const float thresholdCol = 15;
-
+        float duration;
+        float cacheDuration;
         public enum strategies { DCC, CH, F, A, N, NULL }
         strategies curStrategy = strategies.NULL;
         public strategies GetCurrentStrategy { get { return curStrategy; } }
-
-        float duration;
-        float cacheDuration;
         #endregion
 
         #region for navigation
@@ -59,6 +49,10 @@ namespace AnticipatoryModel
         AnimationController anim;
         public AnimationController Anim { get { return anim; } }
         DrawCircleGizmos drawCircles;
+
+        [SerializeField] bool debugLog = false;
+        [SerializeField] bool debugGroups = false;
+        [SerializeField] bool useGroups = false;
 
         void Awake()
         {
@@ -87,23 +81,14 @@ namespace AnticipatoryModel
         public void Init(int id, Vector2 position, Vector2 goal)
         {
             base.id = id;
-
-            // Gaussian distributed speed
-            float rnd;
-            do rnd = Random.value / Random.value; while (rnd >= 1.0);
-            rnd = Mathf.Sqrt(-2.0f * Mathf.Log(1 - rnd)) *
-                Mathf.Cos(2.0f * Mathf.PI * Random.value / Random.value);
-
             base.position = position;
             this. goal = goal;
             radius = 0.25f;
-            prefSpeed = 3 + Mathf.Abs(rnd);
-            timeHorizon = 10;
-            neighborDist = 15;
-
-            duration = Random.Range(1.5f, 3.0f);
+            prefSpeed = Random.Range(1f, 2f);
+            timeHorizon = Random.Range(5f, 10f);
+            neighborDist = Random.Range(5f, 10f);
+            duration = Random.Range(1f, 3f);
 			cacheDuration = duration;
-
             AddToDB();
         }
 
@@ -264,13 +249,13 @@ namespace AnticipatoryModel
         {
             if (debugLog) DebugCollisionType(0);
 
-            int[] s = { 1 };
+            int[] s = { 3 };
 
             if (min_ttc < 3)
-                s = new[] { 1 };
+                s = new[] { 3 };
 
             if (neighbor.IsVirtual || 
-                neighbor.velocity.sqrMagnitude < prefSpeed) s = new[] { 1 };
+                neighbor.velocity.sqrMagnitude < prefSpeed) s = new[] { 3 };
 
             DetermineStrategy(s, true);
         }

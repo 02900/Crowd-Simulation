@@ -595,7 +595,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &59276848
 GameObject:
@@ -839,7 +838,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &81009416
 GameObject:
@@ -913,7 +911,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &92459170
 GameObject:
@@ -1043,7 +1040,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &103484528
 GameObject:
@@ -1528,7 +1524,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &133917444
 GameObject:
@@ -1662,7 +1657,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &136007581
 GameObject:
@@ -1765,7 +1759,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &143585678
 GameObject:
@@ -1810,7 +1803,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &147452254
 GameObject:
@@ -1911,7 +1903,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &150545751
 GameObject:
@@ -1956,7 +1947,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &151113578
 GameObject:
@@ -2262,7 +2252,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &186015197
 GameObject:
@@ -2539,7 +2528,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &211212969
 GameObject:
@@ -2584,7 +2572,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &212374554
 GameObject:
@@ -2629,7 +2616,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &221278275
 GameObject:
@@ -2703,7 +2689,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &224892104
 GameObject:
@@ -2805,7 +2790,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &231683337
 GameObject:
@@ -2992,7 +2976,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &248787399
 GameObject:
@@ -3037,7 +3020,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &249099803
 GameObject:
@@ -3082,7 +3064,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &260068848
 GameObject:
@@ -3624,7 +3605,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &299226723
 GameObject:
@@ -3763,11 +3743,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
+  navmesh: 0
+  fixedPrefSpeed: 0
   debugLog: 0
   debugGroups: 0
   useGroups: 1
-  navmesh: 0
-  fixedPrefSpeed: 1.4
 --- !u!195 &308738567
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4355,7 +4335,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &333213330
 GameObject:
@@ -4529,7 +4508,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &341132085
 GameObject:
@@ -4574,7 +4552,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &342454682
 GameObject:
@@ -5022,7 +4999,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &403333741
 GameObject:
@@ -5238,7 +5214,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &414686529
 GameObject:
@@ -5513,7 +5488,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &430840354
 GameObject:
@@ -6041,7 +6015,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &467160558
 GameObject:
@@ -6172,7 +6145,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &469659082
 GameObject:
@@ -6430,7 +6402,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &484525122
 GameObject:
@@ -6532,7 +6503,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &495404749
 GameObject:
@@ -6577,7 +6547,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &496407557
 GameObject:
@@ -6824,7 +6793,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &510349720
 GameObject:
@@ -7019,11 +6987,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
+  navmesh: 0
+  fixedPrefSpeed: 0
   debugLog: 0
   debugGroups: 0
   useGroups: 1
-  navmesh: 0
-  fixedPrefSpeed: 1.4
 --- !u!195 &531005976
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7598,7 +7566,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &591545288
 GameObject:
@@ -7671,7 +7638,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &598494802
 GameObject:
@@ -8088,7 +8054,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &634604224
 GameObject:
@@ -8565,7 +8530,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &665688853
 GameObject:
@@ -8639,7 +8603,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &669258126
 GameObject:
@@ -8713,7 +8676,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &675704330
 GameObject:
@@ -8938,7 +8900,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &689512260
 GameObject:
@@ -9504,7 +9465,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &725818811
 GameObject:
@@ -9836,7 +9796,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &742681802
 GameObject:
@@ -10054,7 +10013,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &751251197
 GameObject:
@@ -10099,7 +10057,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &751437121
 GameObject:
@@ -10496,7 +10453,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &777944101
 GameObject:
@@ -10541,7 +10497,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &780322268
 GameObject:
@@ -10758,7 +10713,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &808821627
 GameObject:
@@ -10945,7 +10899,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &824470898
 GameObject:
@@ -11280,7 +11233,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &858242716
 GameObject:
@@ -11325,7 +11277,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &859431149
 GameObject:
@@ -11398,7 +11349,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &862215689
 GameObject:
@@ -11538,11 +11488,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
+  navmesh: 0
+  fixedPrefSpeed: 0
   debugLog: 0
   debugGroups: 0
   useGroups: 1
-  navmesh: 0
-  fixedPrefSpeed: 1.4
 --- !u!195 &864278510
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -11948,7 +11898,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &897247904
 GameObject:
@@ -12108,7 +12057,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &905138235
 GameObject:
@@ -12740,7 +12688,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &999633132
 GameObject:
@@ -12813,7 +12760,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1001157382
 GameObject:
@@ -13120,7 +13066,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1038186403
 GameObject:
@@ -13260,11 +13205,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
+  navmesh: 0
+  fixedPrefSpeed: 0
   debugLog: 0
   debugGroups: 0
   useGroups: 1
-  navmesh: 0
-  fixedPrefSpeed: 1.4
 --- !u!195 &1039213906
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -13497,7 +13442,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1054230650
 GameObject:
@@ -13923,7 +13867,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1077986422
 GameObject:
@@ -13997,7 +13940,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1080196761
 GameObject:
@@ -14042,7 +13984,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1082535893
 GameObject:
@@ -14693,7 +14634,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1153283469
 GameObject:
@@ -14766,7 +14706,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1156281067
 GameObject:
@@ -15014,7 +14953,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1176026014
 GameObject:
@@ -15059,7 +14997,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1181019950
 GameObject:
@@ -15218,7 +15155,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1188458668
 GameObject:
@@ -15263,7 +15199,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1189503334
 GameObject:
@@ -15662,7 +15597,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1199622352
 GameObject:
@@ -15974,11 +15908,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
+  navmesh: 0
+  fixedPrefSpeed: 0
   debugLog: 0
   debugGroups: 0
   useGroups: 1
-  navmesh: 0
-  fixedPrefSpeed: 1.4
 --- !u!195 &1223472152
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -16211,7 +16145,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1229810442
 GameObject:
@@ -16284,7 +16217,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1232218624
 GameObject:
@@ -16329,7 +16261,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1234490778
 GameObject:
@@ -16460,7 +16391,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1242851356
 GameObject:
@@ -16677,7 +16607,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1273895289
 GameObject:
@@ -16810,7 +16739,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1280977911
 GameObject:
@@ -16855,7 +16783,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1284173711
 GameObject:
@@ -16987,7 +16914,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1301410792
 GameObject:
@@ -17413,7 +17339,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1333120288
 GameObject:
@@ -17458,7 +17383,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1333797407
 GameObject:
@@ -17560,7 +17484,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1345126589
 GameObject:
@@ -17662,7 +17585,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1351854488
 GameObject:
@@ -17763,7 +17685,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1353939999
 GameObject:
@@ -17865,7 +17786,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1372388783
 GameObject:
@@ -18090,7 +18010,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1386615302
 GameObject:
@@ -18164,7 +18083,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1396198027
 GameObject:
@@ -18456,11 +18374,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
+  navmesh: 0
+  fixedPrefSpeed: 0
   debugLog: 0
   debugGroups: 0
   useGroups: 1
-  navmesh: 0
-  fixedPrefSpeed: 1.4
 --- !u!195 &1424387974
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -18635,7 +18553,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1431755931
 GameObject:
@@ -18794,7 +18711,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1442464137
 GameObject:
@@ -19653,11 +19569,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
+  navmesh: 0
+  fixedPrefSpeed: 0
   debugLog: 0
   debugGroups: 0
   useGroups: 1
-  navmesh: 0
-  fixedPrefSpeed: 1.4
 --- !u!195 &1502966245
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -20032,7 +19948,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1521077651
 GameObject:
@@ -20837,7 +20752,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1605756103
 GameObject:
@@ -20939,7 +20853,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1612620788
 GameObject:
@@ -21098,7 +21011,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1621524081
 GameObject:
@@ -21464,7 +21376,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1641152139
 GameObject:
@@ -21655,7 +21566,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1649418731
 GameObject:
@@ -21871,7 +21781,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1662047695
 GameObject:
@@ -22498,7 +22407,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1693911736
 GameObject:
@@ -23178,7 +23086,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1772772482
 GameObject:
@@ -23493,7 +23400,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1797212216
 GameObject:
@@ -24272,7 +24178,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1856637291
 GameObject:
@@ -24402,7 +24307,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1864666623
 GameObject:
@@ -24851,7 +24755,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1911364989
 GameObject:
@@ -24983,7 +24886,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1924721181
 GameObject:
@@ -25294,7 +25196,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1938404782
 GameObject:
@@ -25483,7 +25384,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1952566222
 GameObject:
@@ -25528,7 +25428,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1956866059
 GameObject:
@@ -25929,7 +25828,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1979815651
 GameObject:
@@ -26003,7 +25901,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1981507761
 GameObject:
@@ -26048,7 +25945,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &1983127644
 GameObject:
@@ -26457,26 +26353,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2027965651}
-  m_LocalRotation: {x: 0.23963499, y: 0, z: 0, w: 0.9708631}
-  m_LocalPosition: {x: 0, y: 4.17, z: -11.08}
+  m_LocalRotation: {x: 0.33380687, y: 0, z: 0, w: 0.94264156}
+  m_LocalPosition: {x: 0, y: 5.6, z: -11.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 27.73, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 39, y: 0, z: 0}
 --- !u!114 &2027965656
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2027965651}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 246cc59c7a84ea44f87f6b70acfe30c5, type: 3}
+  m_Script: {fileID: 11500000, guid: a67b1b5a50697d242820907f9f26e365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  offset: {x: 0, y: 4.17, z: -4.99}
+  offset: {x: 0, y: 8, z: -11.08}
+  targets:
+  - {fileID: 2142895081}
+  - {fileID: 531005972}
+  - {fileID: 1223472148}
+  - {fileID: 1424387970}
+  - {fileID: 308738563}
+  - {fileID: 1502966241}
+  - {fileID: 1039213902}
+  - {fileID: 864278506}
+  smoothTime: 1
+  minZoom: 60
+  maxZoom: 30
+  zoomLimiter: 10
 --- !u!1 &2036433440
 GameObject:
   m_ObjectHideFlags: 0
@@ -26578,7 +26486,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &2050325367
 GameObject:
@@ -26914,7 +26821,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &2087747005
 GameObject:
@@ -26959,7 +26865,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &2092654076
 GameObject:
@@ -27346,7 +27251,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &2132417456
 GameObject:
@@ -27391,7 +27295,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &2137917543
 GameObject:
@@ -27436,7 +27339,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   used: 0
-  usedByID: 0
   debug: 1
 --- !u!1 &2142895080
 GameObject:
@@ -27518,11 +27420,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
+  navmesh: 0
+  fixedPrefSpeed: 0
   debugLog: 0
   debugGroups: 0
   useGroups: 1
-  navmesh: 0
-  fixedPrefSpeed: 1.4
 --- !u!195 &2142895085
 NavMeshAgent:
   m_ObjectHideFlags: 0
