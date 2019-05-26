@@ -9,7 +9,7 @@ namespace AnticipatoryModel
     {
         const float EPSILON = 0.02f;
         const float goalRadius = 0.5f;
-
+    
         #region definition of agent
         float prefSpeed;               // The max speed of the  
         float prefSpeedCache;               // The max speed of the  
@@ -108,6 +108,8 @@ namespace AnticipatoryModel
 
             duration = Random.Range(1.5f, 3.0f);
 			cacheDuration = duration;
+
+            AddToDB();
         }
 
         public bool DoStep()
@@ -121,7 +123,10 @@ namespace AnticipatoryModel
                 return true;
             }
 
-            DetectingNeighbors();
+            ttc.Clear();
+            DetectingNeighbors(neighborDist, dir, viewAngle);
+            DetectingNeighbors(personalSpace, -dir, 360 - viewAngle);
+
             if (useGroups) DetectingGroups();
             Evaluate();
 
@@ -133,59 +138,26 @@ namespace AnticipatoryModel
             }
 
             position += velocity * Engine.timeStep;
+            UpdateDB();
 
             MoveInRealWorld();
             return false;
         }
 
-        void DetectingNeighbors()
+        void DetectingNeighbors(float inRadius, Vector2 forward, float viewAngle)
         {
-            ttc.Clear();
-            Collider[] targetsInViewRadius = Physics.OverlapSphere
-                (transform.position, neighborDist, targetMask);
-
-            for (int i = 0; i < targetsInViewRadius.Length; i++)
+            SearchNeighbors(inRadius);
+            for (int i = 0; i < ProximityNeighbors.Count; i++)
             {
-                var n = targetsInViewRadius[i].GetComponent<AMAgent>();
+                Agent n = (Agent)ProximityNeighbors[i];
                 if (id == n.id) continue;
-                Vector3 dirToTarget =
-                    (targetsInViewRadius[i].transform.position - transform.position).normalized;
-                if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
-                {
-                    float dstToTarget = Vector3.Distance
-                        (transform.position, targetsInViewRadius[i].transform.position);
-                    if (!Physics.Raycast(transform.position + Vector3.up,
-                        dirToTarget, dstToTarget, obstacleMask))
-                    {
-                        // compute time to collision
-                        ttc.Add(n.id, Global.TTC(position, velocity, radius, 
-                            n.position, n.velocity, n.radius));
-                    }
-                }
-            }
 
-            Collider[] targetsInViewRadiusBack = Physics.OverlapSphere
-                (transform.position, personalSpace, targetMask);
-            for (int i = 0; i < targetsInViewRadiusBack.Length; i++)
-            {
-                var n = targetsInViewRadius[i].GetComponent<AMAgent>();
-                if (id == n.id) continue;
-                Vector3 dirToTarget =
-                    (targetsInViewRadiusBack[i].transform.position - transform.position).normalized;
-                if (Vector3.Angle(-transform.forward, dirToTarget) < (360 - viewAngle) / 2)
+                Vector2 dirToNeighbor = n.position - position;
+                if (Vector2.Angle(forward, dirToNeighbor) < viewAngle / 2)
                 {
-                    float dstToTarget =
-                        Vector3.Distance(transform.position, targetsInViewRadiusBack[i].transform.position);
-                    if (!Physics.Raycast(transform.position + Vector3.up,
-                        dirToTarget, dstToTarget, obstacleMask))
-                    {
-                        if (!ttc.ContainsKey(n.id))
-                        {
-                            // compute time to collision
-                            ttc.Add(n.id, Global.TTC(position, velocity, radius,
-                                n.position, n.velocity, n.radius));
-                        }
-                    }
+                    if (!ttc.ContainsKey(n.id))
+                        ttc.Add(n.id, Global.TTC(position, velocity, radius,
+                        n.position, n.velocity, n.radius));
                 }
             }
         }

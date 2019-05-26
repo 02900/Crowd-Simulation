@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using OpenSteer;
 
 namespace AnticipatoryModel
 {
@@ -53,6 +54,13 @@ namespace AnticipatoryModel
         List<Tuple<int, int>> pairs = new List<Tuple<int, int>>();
         List<List<int>> groups = new List<List<int>>();
 
+
+        // The proximity database.
+        protected LQProximityDatabase spatialDatabase;
+
+        ///  Returns a pointer to the proximity database of the engine.
+        public LQProximityDatabase GetSpatialDatabase { get { return spatialDatabase; } }
+
         void AddAgentStat(float time, float dst) {
             TimesTravel.Add(time);
             DistancesTravel.Add(dst);
@@ -76,6 +84,7 @@ namespace AnticipatoryModel
         void Awake()
         {
             Instance = this;
+            spatialDatabase = new LQProximityDatabase(Vector3.zero, new Vector3(500, 0, 500), new Vector3(10, 0, 10));
             results = FindObjectOfType<HandleTextFile>();
             CreateAgents();
             CreateVirtualAgents();

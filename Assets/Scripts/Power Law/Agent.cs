@@ -25,7 +25,7 @@ namespace PowerLaw
     {
         const float EPSILON = 0.02f;
         const float goalRadius = 0.5f;
-        const float maxAccel = 100f;
+        const float maxAccel = 1000;
         private int id;                                                       // The id of the character. 
         private Vector2 position;                                             // The position of the character. 
         private Vector2 velocity;                                             // The velocity of the character. 
@@ -95,7 +95,6 @@ namespace PowerLaw
             {
                 u = Random.value / Random.value;
             } while (u >= 1.0);
-
             prefSpeed += Mathf.Sqrt(-2.0f * Mathf.Log(1.0f - u)) * 0.1f * Mathf.Cos(2.0f * Mathf.PI * Random.value / Random.value);
         
             this.position = position;
@@ -173,6 +172,7 @@ namespace PowerLaw
         /// This force can be replaced by a self-propelled force to simulate agents with 
         /// no preferred direction of motion following the approach of[D.Grossman, 
         /// I.S.Aranson, and E.B.Jacob, New J.Phys. 10, 023036(2008).]
+        /// 
         /// The agent-agent interaction force F_ij derived in Eq. (S2)
         /// of the Supplemental material. A similar force F_iO acting 
         /// on agent i as a result of interaction with each static obstacle O 

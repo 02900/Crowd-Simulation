@@ -217,10 +217,6 @@ namespace PowerLaw
         ///  Returns the list of obstacles. 
         public List<LineObstacle> GetObstacles { get { return obstacles; } }
 
-        /// <param name="id">The id of the agent.</param>
-        /// <returns>Returns the corresponding agent given its id/</returns>
-        public Agent GetAgent(int id) { return agents[id]; }
-
         /// <param name="id">id The id of the obstacle.</param>
         /// <returns>Returns the corresponding line obstacle given its id.</returns>
         public LineObstacle GetObstacle(int id) { return obstacles[id]; }
