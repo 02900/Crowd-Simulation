@@ -77,7 +77,7 @@ namespace AnticipatoryModel
         }
 
         public static Vector2 ChangeDirectionStrategy(Vector2 velocity, Vector2 dir,
-            bool lateral, float ttc, float tH, int TurnOfNeighbor, out int turn)
+            float ttc, float tH, int TurnOfNeighbor, out int turn, bool frontal2)
         {
             // turn: 1 is left, -1 is right
             float bearingAngle = BearingAngle(velocity, dir);
@@ -92,9 +92,8 @@ namespace AnticipatoryModel
                 turn = Random.Range(0, 2) > 0 ? -1 : 1;
             }
 
-            if (TurnOfNeighbor != 0) turn = TurnOfNeighbor;
-
-            float w = (10 + tH - ttc) / (Mathf.Pow(ttc, 2) + 0.1f);
+            if (frontal2 && TurnOfNeighbor != 0) turn = TurnOfNeighbor;
+            float w = (10 + tH - ttc) / (Mathf.Pow(ttc, 2) + 0.3f);
             return ExtensionMethods.RotateVector(velocity, turn * w);
         }
 

@@ -327,7 +327,7 @@ namespace AnticipatoryModel
         void DesactivateVirtualAgents()
         {
             foreach (AMVirtualAgent agenteVirtual in VirtualAgents)
-                if (agenteVirtual.Used) agenteVirtual.Used = false;
+                if (agenteVirtual.Used) agenteVirtual.Reset();
         }
     }
 }

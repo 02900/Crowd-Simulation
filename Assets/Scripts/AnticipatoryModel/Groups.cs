@@ -18,26 +18,29 @@ namespace AnticipatoryModel
                                         out Vector2 closestAgentPosition, 
                                         out Vector2 closestAgentVelocity,
                                         out List<Point> tangentsPoints,
-                                        out List<Tuple<Point, Point>> points)
+                                        out List<Tuple<Point, Point>> points, 
+                                        int povID, out int turnTo)
         {
             float minimoTTC = Mathf.Infinity, minDst = MAX_DISTANCE;
             Point agentPos = new Point(position);
             Point outer1_p1, outer1_p2, outer2_p1, outer2_p2;
-
             tangentsPoints = new List<Point>();
             points = new List<Tuple<Point, Point>>();
 
             closestAgentPosition = Vector2.zero;
             closestAgentVelocity = Vector2.zero;
+            turnTo = 0;
 
             foreach (int id in group)
             {
-                //if (group.Contains(id)) break;
+                if (group.Contains(povID)) break;
                 if (!ttc.ContainsKey(id)) continue;
 
                 // Calculamos el agente mas cercano al observador
                 AMAgent agent_tmp = Engine.Instance.GetAgent(id);
                 float dst = Vector2.Distance(position, agent_tmp.position);
+
+                turnTo += agent_tmp.TurnTo;
 
                 // Si este agente esta mas cerca de lo permitido entonces
                 // no es tomado en cuenta
@@ -159,19 +162,20 @@ namespace AnticipatoryModel
             return Line.IntersetionPoint(tangent1, tangent2);
         }
 
-        public static bool PercivingGroups(Vector2 pov, Vector2 vel, float rad,
-            List<int>group, Dictionary<int, float> ttc, out Vector2 gPos, out Vector2 gVel, out float gRad, bool debug)
+        public static bool PercivingGroups(int povID, Vector2 pov, Vector2 vel, float rad,
+            List<int>group, Dictionary<int, float> ttc, out Vector2 gPos, out Vector2 gVel, out float gRad, out int turnTo, bool debug)
         {
             gPos = Vector2.zero;
             gVel = Vector2.zero;
             gRad = 0;
+            turnTo = 0;
 
             Point agentPos = new Point(pov);
             List<Point> tangentsPoints;
             List<Tuple<Point, Point>> points;
             Vector2 closestAgentPosition;
 
-            GetTangents(group, ttc, pov, rad, out closestAgentPosition, out gVel, out tangentsPoints, out points);
+            GetTangents(group, ttc, pov, rad, out closestAgentPosition, out gVel, out tangentsPoints, out points, povID, out turnTo);
 
             // Necesitamos al menos 2 agentes para formar un grupo
             if (tangentsPoints.Count < 4) return false;

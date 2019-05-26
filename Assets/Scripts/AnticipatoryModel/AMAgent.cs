@@ -38,7 +38,7 @@ namespace AnticipatoryModel
         int cur_low_ttc;
         const float ttc_umbral = 1;
         const int MAX_INMINENT_COLISION = 7;
-        const float thresholdCol = 7;
+        const float thresholdCol = 15;
 
         public enum strategies { DCC, CH, F, A, N, NULL }
         strategies curStrategy = strategies.NULL;
@@ -166,17 +166,18 @@ namespace AnticipatoryModel
             {
                 Vector2 gPos, gVel;
                 float gRad;
+                int turn;
 
-                if (Groups.PercivingGroups(position, goal - position, radius,
-                    group, ttc, out gPos, out gVel, out gRad, debugGroups))
+                if (Groups.PercivingGroups(id, position, goal - position, radius,
+                    group, ttc, out gPos, out gVel, out gRad, out turn, debugGroups))
                 {
-                    gRad+=0.4f;
+                    gRad += 0.35f;
                     var vAgents = Engine.Instance.VirtualAgents;
                     for (int i = 0; i < vAgents.Length; i++)
                     {
                         if (!vAgents[i].Used)
                         {
-                            vAgents[i].SetupAgent(gRad, gPos, gVel);
+                            vAgents[i].SetupAgent(gRad, gPos, gVel, turn);
                             group_ttc.Add(vAgents[i].id, Global.TTC(position, velocity, radius,
                                 gPos, gVel, gRad));
 
@@ -242,7 +243,6 @@ namespace AnticipatoryModel
             }
 
             else {
-                //float theta = 2 * Mathf.Atan(radius / Vector2.Distance(position, neighbor.position)) * Mathf.Rad2Deg;
                 float vAngle = Vector2.Angle(velocity, neighbor.velocity);
                 if (System.Math.Abs(vAngle - 180) < thresholdCol) FrontCollision();
                 else if (System.Math.Abs(vAngle) < thresholdCol) RearCollision();
@@ -256,10 +256,6 @@ namespace AnticipatoryModel
                     Debug.DrawRay(new Vector3(position.x, 2, position.y), ExtensionMethods.Vector2ToVector3(VELA), Color.red);
                     Debug.DrawRay(new Vector3(position.x, 2, position.y), ExtensionMethods.Vector2ToVector3(VELB), Color.red);
                     Debug.DrawRay(new Vector3(position.x, 2, position.y), ExtensionMethods.Vector2ToVector3(neighbor.velocity) * 4, Color.cyan);
-                    //Vector2 VELA2 = ExtensionMethods.RotateVector(velocity, theta) * 8;
-                    //Vector2 VELB2 = ExtensionMethods.RotateVector(velocity, -theta) * 8;
-                    //Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELA2), Color.blue);
-                    //Debug.DrawRay(ExtensionMethods.Vector2ToVector3(position), ExtensionMethods.Vector2ToVector3(VELB2), Color.blue);
                 }
             }
         }
@@ -276,7 +272,7 @@ namespace AnticipatoryModel
             if (neighbor.IsVirtual || 
                 neighbor.velocity.sqrMagnitude < prefSpeed) s = new[] { 1 };
 
-            DetermineStrategy(s);
+            DetermineStrategy(s, true);
         }
 
         void RearCollision()
@@ -298,13 +294,14 @@ namespace AnticipatoryModel
                 if (debugLog) DebugCollisionType(2);
                 s = new[] { 4 };
             }
+
             DetermineStrategy(s);
         }
 
         void LateralCollision()
         {
             if (debugLog) DebugCollisionType(3);
-            int[] s = new[] { 1 };
+            int[] s = new[] { 3 };
             DetermineStrategy(s);
         }
 
@@ -328,7 +325,7 @@ namespace AnticipatoryModel
             Debug.Log("<" + id + ", " + neighbor.id + ">, " + type + " and itsVirtual is " + neighbor.IsVirtual);
         }
 
-        void DetermineStrategy(int[] s, bool lateral = false)
+        void DetermineStrategy(int[] s, bool frontal2 = false)
         {
             bool sameStrategy = false;
             foreach (var ss in s)
@@ -340,11 +337,11 @@ namespace AnticipatoryModel
                 }
             }
 
-            if (!sameStrategy && curStrategy == strategies.NULL && System.Array.IndexOf(s, curStrategy) == -1)
+            if (!sameStrategy && System.Array.IndexOf(s, curStrategy) == -1)
             {
+                ResetStrategy();
                 int i = Random.Range(0, s.Length);
                 curStrategy = (strategies)s[i];
-
                 if (debugLog) Debug.Log(id + " , The current strategy is: " + curStrategy);
             }
 
@@ -356,10 +353,10 @@ namespace AnticipatoryModel
                     break;
 
                 case strategies.CH:
-                    int turnTo;
+                    int turnTo = TurnTo;
                     velocity = Behaviours.GetSteering(position, goal, prefSpeed);
                     velocity = Behaviours.ChangeDirectionStrategy(velocity,
-                        neighbor.position - position, lateral, min_ttc, timeHorizon, neighbor.TurnTo, out turnTo);
+                        neighbor.position - position, min_ttc, timeHorizon, neighbor.TurnTo, out turnTo, frontal2);
                     TurnTo = turnTo;
                     break;
 

@@ -5,16 +5,25 @@ namespace AnticipatoryModel
     public class AMVirtualAgent : Agent
     {
         [SerializeField] bool used;
-        [SerializeField] int usedByID;
         [SerializeField] bool debug;
 
         public bool Used { get { return used; } set { used = value; } }
 
-        public void SetupAgent(float radius, Vector2 position, Vector2 velocity)
+        public void Reset()
+        {
+            used = false;
+            TurnTo = 0;
+        }
+
+        public void SetupAgent(float radius, Vector2 position, Vector2 velocity, int turn)
         {
             this.radius = radius;
             this.position = position;
             this.velocity = velocity;
+
+            if (turn > 0) TurnTo = 1; 
+            if (turn < 0) TurnTo = -1;
+
             used = true;
             isVirtual = true;
         }
