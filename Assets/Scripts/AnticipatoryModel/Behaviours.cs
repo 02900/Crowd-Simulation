@@ -6,8 +6,8 @@ namespace AnticipatoryModel
     public static class Behaviours
     {
         const float EPSILON = 0.02f;
-        const float maxAcc = 250;
-        const float k = 36f;  // k is a tunable parameter that controls the strength of the goal force
+        const float maxAcc = 350f;
+        const float k = 40f;  // k is a tunable parameter that controls the strength of the goal force
 
         /// Only move to goal direction with vpref
         public static Vector2 GetSteering(Vector2 position, Vector2 goal, float prefSpeed)
@@ -48,7 +48,7 @@ namespace AnticipatoryModel
                 FAvoid.Normalize();
 
                 // Force Magnitude
-                if (t >= 0 && t <= tH) k = (tH - t) / (t*t + 0.1f);
+                if (t >= 0 && t <= tH) k = (15 + tH - t) / (t*t + 0.1f);
                 acceleration += FAvoid * Mathf.Clamp(k, 0, maxAcc);
             }
             return acceleration;
@@ -57,16 +57,19 @@ namespace AnticipatoryModel
         public static Vector2 FollowStrategy(float radius, float prefSpeed, 
             Vector2 posA, Vector2 velA, Vector2 posB, Vector2 velB)
         {
-            float ttr = 1.5f;                     // reaction time
-            float df = radius * 3 + 1.5f;         // zone contact + personal distances
+            float ttr = 0.5f;                     // reaction time
+            float df = radius + 1f;         // zone contact + personal distances
 
             // Posicion futura del leader
             Vector2 pl = posB + velB * Engine.timeStep;
+            Vector2 dir = pl - posA;
 
             // distance to future position of leader
-            float dstLeader = (pl - posA).magnitude;
-            float vf = (dstLeader - df) / (Engine.timeStep + ttr);
-            return velA.normalized * Mathf.Clamp(vf, 0, prefSpeed);
+            float proy = dir.magnitude * Mathf.Cos(Vector2.Angle(velA, dir));
+            //float dstLeader = (pl - posA).magnitude;
+            float vf = (proy - df) / (Engine.timeStep + ttr);
+
+            return velA.normalized * Mathf.Clamp(vf, 0.5f, prefSpeed);
         }
 
         public static float BearingAngle(Vector2 velocity, Vector2 dir)
@@ -77,22 +80,19 @@ namespace AnticipatoryModel
         }
 
         public static Vector2 ChangeDirectionStrategy(Vector2 velocity, Vector2 dir,
-            float ttc, float tH, int TurnOfNeighbor, out int turn, bool frontal2)
+            float ttc, float tH, int TurnOfNeighbor, out int turn, int type)
         {
             // turn: 1 is left, -1 is right
             float bearingAngle = BearingAngle(velocity, dir);
-            
             if (bearingAngle < 180) turn = 1;
             else turn = -1;
 
             if (System.Math.Abs(bearingAngle) < EPSILON
                 || System.Math.Abs(bearingAngle - 360) < EPSILON
                 || System.Math.Abs(bearingAngle - 180) < EPSILON)
-            {
                 turn = Random.Range(0, 2) > 0 ? -1 : 1;
-            }
 
-            if (frontal2 && TurnOfNeighbor != 0) turn = TurnOfNeighbor;
+            if ((type == 0 || type == 2) && TurnOfNeighbor != 0) turn = TurnOfNeighbor;
             float w = (10 + tH - ttc) / (Mathf.Pow(ttc, 2) + 0.3f);
             return ExtensionMethods.RotateVector(velocity, turn * w);
         }

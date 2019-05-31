@@ -185,18 +185,26 @@ namespace AnticipatoryModel
 
             GetExtremeTangents(vel, agentPos, tangentsPoints, points, debug, out fl1, out fl2, out fr1, out fr2);
 
+            Line tangent1;
+            Vector2 I = GetExtremeTangentsIntersectionPoint(fl1, fl2, fr1, fr2, out tangent1);
+
             // Vectores extremos tangentes, su suma es la bisectriz
-            // v_t2: farLeft = fl1 - fl2;
-            // v_t3: farRight = fr1 - fr2;
-            Vector2 v_t2 = Point.MakeVector(fl1, fl2);
-            Vector2 v_t3 = Point.MakeVector(fr1, fr2);
+            // v_t2: farLeft = fl2 - fl1;
+            // v_t3: farRight = fr2 - fr1;
+
+            //Vector2 v_t22 = Point.MakeVector(fl1, fl2);
+            //Vector2 v_t33 = Point.MakeVector(fr1, fr2);
+            //Vector2 BII = v_t22.normalized + v_t33.normalized;
+
+            Vector2 v_t2 = new Vector2(fl2.x - I.x, fl2.y - I.y);
+            Vector2 v_t3 = new Vector2(fr2.x - I.x, fr2.y - I.y);
             Vector2 BI = v_t2.normalized + v_t3.normalized;
+
+            // i dont know why, but BI is equal to BII. hmf another way to calculate 
+            //if (debug) Debug.Log("skska: " + (BI == BII));
 
             if (Vector2.Angle(v_t2, v_t3) < 5 ||
                 Vector2.Angle(v_t2, v_t3) > 180) return false;
-
-            Line tangent1;
-            Vector2 I = GetExtremeTangentsIntersectionPoint(fl1, fl2, fr1, fr2, out tangent1);
 
             // Magnitud de la bizectriz es distancia desde I 
             // closestAgentPosition previamente calculado

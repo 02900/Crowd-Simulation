@@ -84,11 +84,16 @@ namespace AnticipatoryModel
             base.position = position;
             this. goal = goal;
             radius = 0.25f;
+            //prefSpeed = Random.Range(1f, 2f);
+            //timeHorizon = Random.Range(5f, 10f);
+            //neighborDist = Random.Range(5f, 10f);
+            //duration = Random.Range(1f, 3f);
+
             prefSpeed = Random.Range(1f, 2f);
-            timeHorizon = Random.Range(5f, 10f);
-            neighborDist = Random.Range(5f, 10f);
-            duration = Random.Range(1f, 3f);
-			cacheDuration = duration;
+            timeHorizon = 6;
+            neighborDist = 7;
+            duration = 2;
+            cacheDuration = duration;
             AddToDB();
         }
 
@@ -102,6 +107,8 @@ namespace AnticipatoryModel
                 velocity = Vector2.zero;
                 return true;
             }
+
+            velocity = Behaviours.GetSteering(position, goal, prefSpeed);
 
             ttc.Clear();
             DetectingNeighbors(neighborDist, dir, viewAngle);
@@ -223,9 +230,7 @@ namespace AnticipatoryModel
         void ApplyStrategy()
         {
             if (neighbor.velocity.magnitude < 0.3f)
-            {
                 StaticObstacleCollision();
-            }
 
             else {
                 float vAngle = Vector2.Angle(velocity, neighbor.velocity);
@@ -249,13 +254,17 @@ namespace AnticipatoryModel
         {
             if (debugLog) DebugCollisionType(0);
             int[] s = { 1 };
-            DetermineStrategy(s, true);
+            DetermineStrategy(s, 0);
         }
 
         void RearCollision()
         {
-            float bearingAngle = Behaviours.BearingAngle(velocity, neighbor.position - position);
+            Vector2 dir = velocity;
+            if (velocity.sqrMagnitude < EPSILON) dir = goal - position;
+
+            float bearingAngle = Behaviours.BearingAngle(dir, neighbor.position - position);
             int[] s;
+
             // Front
             if (bearingAngle <= 90 || bearingAngle > 270)
             {
@@ -279,7 +288,7 @@ namespace AnticipatoryModel
         {
             if (debugLog) DebugCollisionType(3);
             int[] s = new[] { 3 };
-            DetermineStrategy(s);
+            DetermineStrategy(s, 2);
         }
 
         void StaticObstacleCollision()
@@ -302,7 +311,7 @@ namespace AnticipatoryModel
             Debug.Log("<" + id + ", " + neighbor.id + ">, " + type + " and itsVirtual is " + neighbor.IsVirtual);
         }
 
-        void DetermineStrategy(int[] s, bool frontal2 = false)
+        void DetermineStrategy(int[] s, int type=-1)
         {
             bool sameStrategy = false;
             foreach (var ss in s)
@@ -325,20 +334,25 @@ namespace AnticipatoryModel
             switch (curStrategy)
             {
                 case strategies.DCC:
-                    velocity = Behaviours.GetSteering(position, goal, prefSpeed);
                     velocity = Behaviours.DecelerationStrategy(min_ttc, velocity);
                     break;
 
                 case strategies.CH:
                     int turnTo = TurnTo;
-                    velocity = Behaviours.GetSteering(position, goal, prefSpeed);
+                    Vector2 dir = neighbor.position - position;
+                    if (type == 2) dir = neighbor.velocity - velocity;
+
                     velocity = Behaviours.ChangeDirectionStrategy(velocity,
-                        neighbor.position - position, min_ttc, timeHorizon, neighbor.TurnTo, out turnTo, frontal2);
+                        dir, min_ttc, timeHorizon,
+                        neighbor.TurnTo, out turnTo, type);
                     TurnTo = turnTo;
+
+                    if (type == 2)
+                        foreach (var t in ttc.Keys)
+                            Engine.Instance.GetAgent(t).TurnTo = turnTo;
                     break;
 
                 case strategies.F:
-                    velocity = Behaviours.GetSteering(position, goal, prefSpeed);
                     velocity = Behaviours.FollowStrategy(radius, prefSpeed, position, 
                         velocity, neighbor.position, neighbor.velocity);
                     break;
@@ -349,7 +363,6 @@ namespace AnticipatoryModel
                     break;
 
                 case strategies.N:
-                    velocity = Behaviours.GetSteering(position, goal, prefSpeed);
                     break;
             }
 

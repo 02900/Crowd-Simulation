@@ -306,7 +306,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 5.04
+      value: 7.39
       objectReference: {fileID: 0}
     - target: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalRotation.x
@@ -335,26 +335,26 @@ Prefab:
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: debugGroups
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: useGroups
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: debugLog
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4491587100219296, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 55
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: fixedPrefSpeed
-      value: 3
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 4491587100219296, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.x
@@ -376,6 +376,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
   m_IsPrefabAsset: 0
+--- !u!4 &548791869 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
+    type: 2}
+  m_PrefabInternal: {fileID: 504301382}
 --- !u!1001 &548874139
 Prefab:
   m_ObjectHideFlags: 0
@@ -393,7 +398,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalRotation.x
@@ -422,17 +427,17 @@ Prefab:
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: debugGroups
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: useGroups
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: debugLog
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4491587100219296, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -441,7 +446,7 @@ Prefab:
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: fixedPrefSpeed
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4491587100219296, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.x
@@ -459,11 +464,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
   m_IsPrefabAsset: 0
---- !u!4 &548874140 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
-    type: 2}
-  m_PrefabInternal: {fileID: 548874139}
 --- !u!1 &613074460
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,7 +718,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.23
+      value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalRotation.x
@@ -747,17 +747,17 @@ Prefab:
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: debugGroups
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: useGroups
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: debugLog
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4491587100219296, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -766,7 +766,7 @@ Prefab:
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: fixedPrefSpeed
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4491587100219296, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1003,7 +1003,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 3.01
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4042343603106176, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1032,17 +1032,17 @@ Prefab:
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: debugGroups
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: useGroups
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114032260579826426, guid: f4b64edfb1e62ce4abbf6e70f27a8df8,
         type: 2}
       propertyPath: debugLog
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4491587100219296, guid: f4b64edfb1e62ce4abbf6e70f27a8df8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1465,7 +1465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246cc59c7a84ea44f87f6b70acfe30c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 548874140}
+  target: {fileID: 548791869}
   offset: {x: 0, y: 4.17, z: -4.99}
 --- !u!1001 &2082736947
 Prefab:
