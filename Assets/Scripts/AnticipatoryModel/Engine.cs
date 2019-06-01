@@ -15,9 +15,9 @@ namespace AnticipatoryModel
         float framesCountDelayed;
 
         #region Groups
-        const float ed = 1.85f;               // distance        
+        const float ed = 1.25f;               // distance        
         const float ev = 1.5f;                // velocity
-        const float eav = 15;                 // angle
+        const float eav = 4;                 // angle
         #endregion
 
         AMAgent[] agents;

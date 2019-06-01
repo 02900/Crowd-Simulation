@@ -22,7 +22,7 @@ namespace AnticipatoryModel
         {
             Vector2 acceleration = k * (goalVelocity - velocity);
             acceleration += ComputeForces(position, velocity, timeHorizon, targets) * 0.4f;
-            acceleration += ComputeForces(position, velocity, timeHorizon, targetGroups, true) * 0.8f;
+            acceleration += ComputeForces(position, velocity, timeHorizon, targetGroups, true) * 0.3f;
             return acceleration * Engine.timeStep;
         }
 
@@ -48,7 +48,7 @@ namespace AnticipatoryModel
                 FAvoid.Normalize();
 
                 // Force Magnitude
-                if (t >= 0 && t <= tH) k = (10 - t) / (t*t + 0.1f);
+                if (t >= 0 && t <= tH) k = (20 - t) / (t + 0.1f);
                 acceleration += FAvoid * Mathf.Clamp(k, 0, maxAcc);
             }
             return acceleration;
@@ -95,6 +95,12 @@ namespace AnticipatoryModel
             if ((type == 0 || type == 2) && TurnOfNeighbor != 0) turn = TurnOfNeighbor;
             float w = (8 - ttc) / (Mathf.Pow(ttc, 1f) + 0.1f);
             return ExtensionMethods.RotateVector(velocity, turn * w);
+        }
+
+        public static bool ItsInFront(Vector2 myDir, Vector2 ToObject)
+        {
+            float ba = BearingAngle(myDir, ToObject);
+            return ba < 45 || ba > 315;
         }
 
         public static Vector2 DecelerationStrategy(float t, Vector2 velocity)

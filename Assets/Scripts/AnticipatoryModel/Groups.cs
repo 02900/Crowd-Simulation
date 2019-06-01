@@ -14,18 +14,19 @@ namespace AnticipatoryModel
 
         // Deteccion de puntos extremos tangentes
         static void GetTangents(List<int> group, Dictionary<int, float> ttc, 
-                                        Vector2 position, float radius,
+                                        Vector2 position, Vector2 dir, float radius,
                                         out Vector2 closestAgentPosition, 
                                         out Vector2 closestAgentVelocity,
                                         out List<Point> tangentsPoints,
                                         out List<Tuple<Point, Point>> points, 
-                                        int povID, out int turnTo)
+                                        int povID, out int turnTo, out List<int> members)
         {
             float minimoTTC = Mathf.Infinity, minDst = MAX_DISTANCE;
             Point agentPos = new Point(position);
             Point outer1_p1, outer1_p2, outer2_p1, outer2_p2;
             tangentsPoints = new List<Point>();
             points = new List<Tuple<Point, Point>>();
+            members = new List<int>();
 
             closestAgentPosition = Vector2.zero;
             closestAgentVelocity = Vector2.zero;
@@ -45,6 +46,7 @@ namespace AnticipatoryModel
                 // Si este agente esta mas cerca de lo permitido entonces
                 // no es tomado en cuenta
                 if (dst < MIN_DISTANCE) { continue; }
+                if (!Behaviours.ItsInFront(dir, agent_tmp.position - position)) continue;
 
                 if (dst < minDst)
                 {
@@ -57,6 +59,8 @@ namespace AnticipatoryModel
                     closestAgentVelocity = agent_tmp.velocity;
                     minimoTTC = ttc[id];
                 }
+
+                members.Add(id);
 
                 // Find tangents points from this agent to actual iteration neighbour
                 Global.FindCircleCircleTangents(agentPos, radius,
@@ -163,7 +167,8 @@ namespace AnticipatoryModel
         }
 
         public static bool PercivingGroups(int povID, Vector2 pov, Vector2 vel, float rad,
-            List<int>group, Dictionary<int, float> ttc, out Vector2 gPos, out Vector2 gVel, out float gRad, out int turnTo, bool debug)
+            List<int>group, Dictionary<int, float> ttc, out Vector2 gPos, out Vector2 gVel, 
+            out float gRad, out int turnTo, out List<int> members, bool debug)
         {
             gPos = Vector2.zero;
             gVel = Vector2.zero;
@@ -174,8 +179,9 @@ namespace AnticipatoryModel
             List<Point> tangentsPoints;
             List<Tuple<Point, Point>> points;
             Vector2 closestAgentPosition;
+            members = new List<int>();
 
-            GetTangents(group, ttc, pov, rad, out closestAgentPosition, out gVel, out tangentsPoints, out points, povID, out turnTo);
+            GetTangents(group, ttc, pov, vel, rad, out closestAgentPosition, out gVel, out tangentsPoints, out points, povID, out turnTo, out members);
 
             // Necesitamos al menos 2 agentes para formar un grupo
             if (tangentsPoints.Count < 4) return false;

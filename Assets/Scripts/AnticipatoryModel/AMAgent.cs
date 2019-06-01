@@ -151,14 +151,14 @@ namespace AnticipatoryModel
 
             foreach (List<int> group in Engine.Instance.GetGroups)
             {
+                List<int> members;
                 Vector2 gPos, gVel;
                 float gRad;
                 int turn;
 
                 if (Groups.PercivingGroups(id, position, goal - position, radius,
-                    group, ttc, out gPos, out gVel, out gRad, out turn, debugGroups))
+                    group, ttc, out gPos, out gVel, out gRad, out turn, out members, debugGroups))
                 {
-                    gRad += 0.35f;
                     var vAgents = Engine.Instance.VirtualAgents;
                     for (int i = 0; i < vAgents.Length; i++)
                     {
@@ -168,10 +168,8 @@ namespace AnticipatoryModel
                             group_ttc.Add(vAgents[i].id, Global.TTC(position, velocity, radius,
                                 gPos, gVel, gRad));
 
-                            foreach (int id in group)
-                                if (ttc.ContainsKey(id) &&
-                                    ttc[id] > group_ttc[vAgents[i].id])
-                                    ttc[id] = Mathf.Infinity;
+                            foreach (int id in members)
+                                ttc[id] = Mathf.Infinity;
                             break;
                         }
                     }
@@ -290,7 +288,7 @@ namespace AnticipatoryModel
         void StaticObstacleCollision()
         {
             if (debugLog) DebugCollisionType(4);
-            int[] s = { 3 };
+            int[] s = { 1 };
             DetermineStrategy(s);
         }
 
@@ -341,10 +339,10 @@ namespace AnticipatoryModel
                         neighbor.TurnTo, out turnTo, type);
                     TurnTo = turnTo;
 
-                    if (type == 0)
-                        foreach (var t in ttc.Keys)
-                            if (ttc[t] < 1)
-                                Engine.Instance.GetAgent(t).TurnTo = turnTo;
+                    //if (type == 0)
+                    //    foreach (var t in ttc.Keys)
+                    //        if (ttc[t] < 1)
+                    //            Engine.Instance.GetAgent(t).TurnTo = turnTo;
                     break;
 
                 case strategies.F:

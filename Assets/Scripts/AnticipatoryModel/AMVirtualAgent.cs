@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using System.Collections.Generic;
 namespace AnticipatoryModel
 {
     public class AMVirtualAgent : Agent
