@@ -63,17 +63,7 @@ namespace RVO2
                 position = ExtensionMethods.ToXZ(agents[i].transform.position);
                 goal[i] = ExtensionMethods.ToXZ(agents[i].transform.GetChild(0).position);
                 agents[i].id = Simulator.Instance.addAgent(position);
-
-                speed = 3;
-
-                //gaussian distributed speed
-                float u;
-                do
-                {
-                    u = Random.value / Random.value;
-                } while (u >= 1.0);
-
-                speed += Mathf.Sqrt(-2.0f * Mathf.Log(1.0f - u)) * 0.1f * Mathf.Cos(2.0f * Mathf.PI * Random.value / Random.value);
+                speed = Random.Range(1.3f, 1.6f);
                 Simulator.Instance.setAgentMaxSpeed(agents[i].id, speed);
             }
 

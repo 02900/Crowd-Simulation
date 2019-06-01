@@ -87,16 +87,7 @@ namespace PowerLaw
             t0 = 4.47f;
             neighborDist = 11.6f;
             radius = 0.25f;
-            prefSpeed = 1.5f;
-
-            //gaussian distributed speed
-            float u;
-            do
-            {
-                u = Random.value / Random.value;
-            } while (u >= 1.0);
-            prefSpeed += Mathf.Sqrt(-2.0f * Mathf.Log(1.0f - u)) * 0.1f * Mathf.Cos(2.0f * Mathf.PI * Random.value / Random.value);
-        
+            prefSpeed = Random.Range(1.3f, 1.6f);
             this.position = position;
             this.goal = goal;
 
@@ -382,7 +373,7 @@ namespace PowerLaw
         float GetPercentSpeed()
         {
             if (System.Math.Abs(velocity.magnitude) < EPSILON) return 0.01f;
-            return velocity.magnitude / 3;
+            return velocity.magnitude / 1.5f;
         }
 
         public void Move(Vector3 dir)

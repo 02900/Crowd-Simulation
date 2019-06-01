@@ -110,7 +110,7 @@ namespace RVO2
         float GetPercentSpeed(Vector2 velocity)
         {
             if (System.Math.Abs(velocity.magnitude) < EPSILON) return 0.01f;
-            return velocity.magnitude / 3;
+            return velocity.magnitude / 1.5f;
         }
 
         void Move(Vector2 velocity)

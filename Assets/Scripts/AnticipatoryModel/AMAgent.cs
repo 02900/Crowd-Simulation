@@ -8,7 +8,7 @@ namespace AnticipatoryModel
     public class AMAgent : Agent
     {
         const float EPSILON = 0.02f;
-        const float goalRadius = 0.5f;
+        const float goalRadius = 0.75f;
     
         #region definition of agent
         float prefSpeed;               // The max speed of the  
@@ -17,8 +17,8 @@ namespace AnticipatoryModel
 
         float neighborDist;
         float viewAngle = 180;
-        float personalSpace = 3;
-        const float thresholdCol = 15;
+        float personalSpace = 1;
+        const float thresholdCol = 12;
         #endregion
 
         #region state of agent
@@ -84,15 +84,10 @@ namespace AnticipatoryModel
             base.position = position;
             this. goal = goal;
             radius = 0.25f;
-            //prefSpeed = Random.Range(1f, 2f);
-            //timeHorizon = Random.Range(5f, 10f);
-            //neighborDist = Random.Range(5f, 10f);
-            //duration = Random.Range(1f, 3f);
-
-            prefSpeed = Random.Range(1f, 2f);
-            timeHorizon = 6;
-            neighborDist = 7;
-            duration = 2;
+            prefSpeed = Random.Range(1.3f, 1.6f);
+            timeHorizon = Random.Range(3, 4);
+            neighborDist = Random.Range(8, 9);
+            duration = Random.Range(3f, 4f);
             cacheDuration = duration;
             AddToDB();
         }
@@ -252,6 +247,7 @@ namespace AnticipatoryModel
 
         void FrontCollision()
         {
+            // circle only 3 xd
             if (debugLog) DebugCollisionType(0);
             int[] s = { 1 };
             DetermineStrategy(s, 0);
@@ -270,7 +266,7 @@ namespace AnticipatoryModel
             {
                 if (debugLog) DebugCollisionType(1);
                 s = new []{ 1, 2 };
-                if (neighbor.velocity.sqrMagnitude < 1 ) s = new int[] { 1 };
+                if (neighbor.velocity.sqrMagnitude < EPSILON) s = new int[] { 1 };
             }
 
             // Back
@@ -278,7 +274,7 @@ namespace AnticipatoryModel
             else
             {
                 if (debugLog) DebugCollisionType(2);
-                s = new[] { 1 };
+                s = new[] { 1, 3 };
             }
 
             DetermineStrategy(s);
@@ -294,7 +290,7 @@ namespace AnticipatoryModel
         void StaticObstacleCollision()
         {
             if (debugLog) DebugCollisionType(4);
-            int[] s = { 1 };
+            int[] s = { 3 };
             DetermineStrategy(s);
         }
 
@@ -331,6 +327,8 @@ namespace AnticipatoryModel
                 if (debugLog) Debug.Log(id + " , The current strategy is: " + curStrategy);
             }
 
+            int turnTo = TurnTo;
+            Vector2 dir = (neighbor.position - position) + (neighbor.velocity - velocity) * Engine.timeStep;
             switch (curStrategy)
             {
                 case strategies.DCC:
@@ -338,18 +336,15 @@ namespace AnticipatoryModel
                     break;
 
                 case strategies.CH:
-                    int turnTo = TurnTo;
-                    Vector2 dir = neighbor.position - position;
-                    if (type == 2) dir = neighbor.velocity - velocity;
-
                     velocity = Behaviours.ChangeDirectionStrategy(velocity,
                         dir, min_ttc, timeHorizon,
                         neighbor.TurnTo, out turnTo, type);
                     TurnTo = turnTo;
 
-                    if (type == 2)
+                    if (type == 0)
                         foreach (var t in ttc.Keys)
-                            Engine.Instance.GetAgent(t).TurnTo = turnTo;
+                            if (ttc[t] < 1)
+                                Engine.Instance.GetAgent(t).TurnTo = turnTo;
                     break;
 
                 case strategies.F:
@@ -358,6 +353,16 @@ namespace AnticipatoryModel
                     break;
 
                 case strategies.A:
+                    velocity = Behaviours.ChangeDirectionStrategy(velocity,
+                        dir, min_ttc, timeHorizon,
+                        neighbor.TurnTo, out turnTo, type);
+                    TurnTo = turnTo;
+
+                    if (type == 2)
+                        foreach (var t in ttc.Keys)
+                            if (ttc[t] < 1)
+                                Engine.Instance.GetAgent(t).TurnTo = turnTo;
+
                     velocity += Behaviours.CollisionAvoidance(position, velocity, 
                     Behaviours.GetSteering(position, goal, prefSpeed), timeHorizon, ttc, group_ttc);
                     break;

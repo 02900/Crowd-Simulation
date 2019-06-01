@@ -6,8 +6,8 @@ namespace AnticipatoryModel
     public static class Behaviours
     {
         const float EPSILON = 0.02f;
-        const float maxAcc = 350f;
-        const float k = 40f;  // k is a tunable parameter that controls the strength of the goal force
+        const float maxAcc = 150f;
+        const float k = 20f;  // k is a tunable parameter that controls the strength of the goal force
 
         /// Only move to goal direction with vpref
         public static Vector2 GetSteering(Vector2 position, Vector2 goal, float prefSpeed)
@@ -21,8 +21,8 @@ namespace AnticipatoryModel
             Dictionary<int, float> targetGroups)
         {
             Vector2 acceleration = k * (goalVelocity - velocity);
-            acceleration += ComputeForces(position, velocity, timeHorizon, targets);
-            acceleration += ComputeForces(position, velocity, timeHorizon, targetGroups, true);
+            acceleration += ComputeForces(position, velocity, timeHorizon, targets) * 0.4f;
+            acceleration += ComputeForces(position, velocity, timeHorizon, targetGroups, true) * 0.8f;
             return acceleration * Engine.timeStep;
         }
 
@@ -48,7 +48,7 @@ namespace AnticipatoryModel
                 FAvoid.Normalize();
 
                 // Force Magnitude
-                if (t >= 0 && t <= tH) k = (15 + tH - t) / (t*t + 0.1f);
+                if (t >= 0 && t <= tH) k = (10 - t) / (t*t + 0.1f);
                 acceleration += FAvoid * Mathf.Clamp(k, 0, maxAcc);
             }
             return acceleration;
@@ -93,7 +93,7 @@ namespace AnticipatoryModel
                 turn = Random.Range(0, 2) > 0 ? -1 : 1;
 
             if ((type == 0 || type == 2) && TurnOfNeighbor != 0) turn = TurnOfNeighbor;
-            float w = (10 + tH - ttc) / (Mathf.Pow(ttc, 2) + 0.3f);
+            float w = (8 - ttc) / (Mathf.Pow(ttc, 1f) + 0.1f);
             return ExtensionMethods.RotateVector(velocity, turn * w);
         }
 
