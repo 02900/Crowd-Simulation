@@ -247,7 +247,7 @@ namespace AnticipatoryModel
         {
             // circle only 3 xd
             if (debugLog) DebugCollisionType(0);
-            int[] s = { 1 };
+            int[] s = { 3 };
             DetermineStrategy(s, 0);
         }
 
@@ -263,7 +263,7 @@ namespace AnticipatoryModel
             if (bearingAngle <= 90 || bearingAngle > 270)
             {
                 if (debugLog) DebugCollisionType(1);
-                s = new []{ 1, 2 };
+                s = new []{ 3, 2 };
                 if (neighbor.velocity.sqrMagnitude < EPSILON) s = new int[] { 1 };
             }
 
@@ -272,7 +272,7 @@ namespace AnticipatoryModel
             else
             {
                 if (debugLog) DebugCollisionType(2);
-                s = new[] { 1, 3 };
+                s = new[] { 3 };
             }
 
             DetermineStrategy(s);
@@ -288,7 +288,7 @@ namespace AnticipatoryModel
         void StaticObstacleCollision()
         {
             if (debugLog) DebugCollisionType(4);
-            int[] s = { 1 };
+            int[] s = { 3 };
             DetermineStrategy(s);
         }
 
@@ -326,7 +326,7 @@ namespace AnticipatoryModel
             }
 
             int turnTo = TurnTo;
-            Vector2 dir = (neighbor.position - position) + (neighbor.velocity - velocity) * Engine.timeStep;
+            Vector2 dir = (neighbor.position - position);
             switch (curStrategy)
             {
                 case strategies.DCC:
