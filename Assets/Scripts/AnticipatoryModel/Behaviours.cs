@@ -55,7 +55,7 @@ namespace AnticipatoryModel
         }
 
         public static Vector2 FollowStrategy(float radius, float prefSpeed, 
-            Vector2 posA, Vector2 velA, Vector2 posB, Vector2 velB)
+            Vector2 posA, Vector2 velA, Vector2 posB, Vector2 velB, bool debugFollowing)
         {
             float ttr = 0.5f;                     // reaction time
             float df = radius + 1f;         // zone contact + personal distances
@@ -65,9 +65,16 @@ namespace AnticipatoryModel
             Vector2 dir = pl - posA;
 
             // distance to future position of leader
-            float proy = dir.magnitude * Mathf.Cos(Vector2.Angle(velA, dir));
-            //float dstLeader = (pl - posA).magnitude;
+            float proy = dir.magnitude * Mathf.Cos(Vector2.Angle(velA, dir) * Mathf.Deg2Rad);
             float vf = (proy - df) / (Engine.timeStep + ttr);
+
+            if (debugFollowing) {
+                Vector2 pEstDir = velA.normalized * proy;
+                Vector2 pEst = pEstDir + posA;
+                Vector3 tmp = ExtensionMethods.Vector2ToVector3(velA.normalized);
+                Debug.DrawRay(ExtensionMethods.Vector2ToVector3(pEst), -tmp * (vf * ttr), Color.green);
+                Debug.DrawRay(ExtensionMethods.Vector2ToVector3(pEst) - (tmp * (vf * ttr)), - tmp * df, Color.blue);
+            }
 
             return velA.normalized * Mathf.Clamp(vf, 0.5f, prefSpeed);
         }

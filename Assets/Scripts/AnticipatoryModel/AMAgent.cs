@@ -51,6 +51,7 @@ namespace AnticipatoryModel
         DrawCircleGizmos drawCircles;
 
         [SerializeField] bool debugLog = false;
+        [SerializeField] bool debugFollowing= false;
         [SerializeField] bool debugGroups = false;
         [SerializeField] bool useGroups = false;
 
@@ -263,7 +264,7 @@ namespace AnticipatoryModel
             if (bearingAngle <= 90 || bearingAngle > 270)
             {
                 if (debugLog) DebugCollisionType(1);
-                s = new []{ 3, 2 };
+                s = new []{ 2 };
                 if (neighbor.velocity.sqrMagnitude < EPSILON) s = new int[] { 1 };
             }
 
@@ -326,7 +327,10 @@ namespace AnticipatoryModel
             }
 
             int turnTo = TurnTo;
-            Vector2 dir = (neighbor.position - position);
+            // Other options ??
+            //Vector2 dir = neighbor.position - position;
+            //Vector2 dir = neighbor.velocity - velocity;
+            Vector2 dir = neighbor.position - position + (neighbor.velocity - velocity) * Engine.timeStep;
             switch (curStrategy)
             {
                 case strategies.DCC:
@@ -347,7 +351,7 @@ namespace AnticipatoryModel
 
                 case strategies.F:
                     velocity = Behaviours.FollowStrategy(radius, prefSpeed, position, 
-                        velocity, neighbor.position, neighbor.velocity);
+                        velocity, neighbor.position, neighbor.velocity, debugFollowing);
                     break;
 
                 case strategies.A:
