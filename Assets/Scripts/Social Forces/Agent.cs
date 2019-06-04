@@ -24,7 +24,7 @@ namespace SocialForces
         const float T = 0.54F;  // Relaxation time based on (Moussaid et al., 2009)
         const float neighborDist = 15;
 
-        int id;
+        [HideInInspector] public int id;
         float radius;
         float prefSpeed;
 

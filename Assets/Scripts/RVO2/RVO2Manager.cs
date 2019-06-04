@@ -67,9 +67,12 @@ namespace RVO2
                 Simulator.Instance.setAgentMaxSpeed(agents[i].id, speed);
             }
 
-            DST_TRAVEL = new float[agents.Length];
-            TIME_TRAVEL = new float[agents.Length];
-            EKinematic = new float[agents.Length];
+            if (results.recordStats)
+            {
+                DST_TRAVEL = new float[agents.Length];
+                TIME_TRAVEL = new float[agents.Length];
+                EKinematic = new float[agents.Length];
+            }
             finish = new bool[agents.Length];
 
             TimesTravel = new List<float>();
@@ -94,6 +97,8 @@ namespace RVO2
                 ek_mean /= agents.Length;
                 results.WriteString(time_mean, dst_mean, ek_mean, 
                     TimesTravel[agents.Length-1]);
+
+                results.CloseRecord();
             }
         }
 
@@ -116,6 +121,11 @@ namespace RVO2
             while (true)
             {
                 yield return new WaitForSeconds(timeStep);
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    ForceFinish();
+                    yield break;
+                }
                 if (Input.GetKey(KeyCode.Z)) UpdateSimulation();
                 else PauseAnimation();
             }
@@ -132,7 +142,7 @@ namespace RVO2
                 yield return new WaitForSeconds(moreDelayedTimeStep);
                 if (!results.loadRec && Input.GetKey(KeyCode.Z))
                 {
-                    for (int i = 0; i < agents.Length && results.record; i++)
+                    for (int i = 0; i < agents.Length && results.recordStats; i++)
                     {
                         vel = Simulator.Instance.getAgentVelocity(i);
                         if (!finish[i])
@@ -142,6 +152,23 @@ namespace RVO2
                 }
             }
         }
+
+        void ForceFinish()
+        {
+            foreach (var a in agents)
+            {
+                if (finish[a.id]) continue;
+                if (results.recordStats)
+                {
+                    TIME_TRAVEL[a.id] = framesCount * timeStep;
+                    EKinematic[a.id] /= framesCountDelayed;
+                    AddAgentStat(TIME_TRAVEL[a.id], DST_TRAVEL[a.id]);
+                }
+                agents[a.id].ResetAnimParameters(Vector2.zero, GetPrefSpeed(a.id), true);
+                finish[a.id] = true;
+            }
+        }
+
 
         /// <summary>
         /// Performs a simulation/integration step i.e. updates the acceleration, 
@@ -166,7 +193,7 @@ namespace RVO2
 
                     agents[i].MoveInRealWorld(GetPosition(i), GetVelocity(i));
 
-                    if (results.record && GetVelocity(i) != Vector2.zero)
+                    if (results.recordStats && GetVelocity(i) != Vector2.zero)
                     {
                         float dstChange = Vector2.Distance(prevPos[i], GetPosition(i));
                         DST_TRAVEL[i] += dstChange;
@@ -176,12 +203,12 @@ namespace RVO2
 
                     if (finish[i])
                     {
-                        if (results.record) {
+                        if (results.recordStats) {
                             TIME_TRAVEL[i] = framesCount * timeStep;
                             EKinematic[i] /= framesCountDelayed;
                             AddAgentStat(TIME_TRAVEL[i], DST_TRAVEL[i]);
                         }
-                        agents[i].ResetAnimParameters(GetVelocity(i), GetPrefSpeed(i), true);
+                        agents[i].ResetAnimParameters(Vector2.zero, GetPrefSpeed(i), true);
                     }
                 }
             }

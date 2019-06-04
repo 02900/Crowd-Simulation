@@ -107,7 +107,7 @@ namespace AnticipatoryModel
         public static bool ItsInFront(Vector2 myDir, Vector2 ToObject)
         {
             float ba = BearingAngle(myDir, ToObject);
-            return ba < 45 || ba > 315;
+            return ba < 30 || ba > 330;
         }
 
         public static Vector2 DecelerationStrategy(float t, Vector2 velocity)

@@ -26,7 +26,7 @@ namespace PowerLaw
         const float EPSILON = 0.02f;
         const float goalRadius = 0.5f;
         const float maxAccel = 23;
-        private int id;                                                       // The id of the character. 
+        [HideInInspector] public int id;                                                       // The id of the character. 
         private Vector2 position;                                             // The position of the character. 
         private Vector2 velocity;                                             // The velocity of the character. 
         private float radius;                                                 // The raidus of the character. 

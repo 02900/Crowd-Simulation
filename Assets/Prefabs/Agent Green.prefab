@@ -2579,6 +2579,7 @@ MonoBehaviour:
   navmesh: 0
   fixedPrefSpeed: 1.4
   debugLog: 0
+  debugFollowing: 0
   debugGroups: 0
   useGroups: 1
 --- !u!114 &114036221499064514

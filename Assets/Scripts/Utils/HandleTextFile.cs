@@ -7,23 +7,35 @@ public class HandleTextFile : MonoBehaviour
     [SerializeField] string testName;
     [SerializeField] string recName;
 
+    public bool recordStats;
     public bool record;
     public bool loadRec;
     StreamReader reader;
+    StreamWriter writer;
 
     public void Awake()
     {
-        string path = "Assets/Results/" + testName + "-" + i + "-trajectories.txt";
+        if (record && loadRec) loadRec = false;
+
+        string path;
+        string t = "";
+
+        if (record) {
+            t = "-trajectories";
+            path = "Assets/Results/" + testName + "-" + i + "-trajectories.txt";
+        }
+
+        else path = "Assets/Results/" + testName + "-" + i + ".txt";
 
         while (File.Exists(path))
         {
             i++;
-            path = "Assets/Results/" + testName + "-" + i + "-trajectories.txt";
+            path = "Assets/Results/" + testName + "-" + i + t + ".txt";
         }
 
         if (!loadRec)
         {
-            if (record) IniTrajectoryFile();
+            if (record) IniTrajectoryFile(t);
         }
         else
         {
@@ -32,24 +44,23 @@ public class HandleTextFile : MonoBehaviour
         }
     }
 
-    public void IniTrajectoryFile()
+    public void IniTrajectoryFile(string t)
     {
         string path = "Assets/Results/" + testName + "-" + i + "-trajectories.txt";
-
-        StreamWriter writer = new StreamWriter(path, true);
+        writer = new StreamWriter(path, true);
         writer.WriteLine("Test " + testName + "-trayectorias");
-        writer.Close();
     }
 
     public void RecordStep (Vector2 Position, Vector2 Velocity)
     {
-        string path = "Assets/Results/" + testName + "-" + i + "-trajectories.txt";
-        StreamWriter writer = new StreamWriter(path, true);
+        if (writer == null) return;
         writer.WriteLine(Position.ToString("F4"));
         writer.WriteLine(Velocity.ToString("F4"));
-        writer.Close();
     }
 
+    public void CloseRecord() {
+        if (record && writer != null) writer.Close();
+    }
 
     public void WriteString(float time_mean, float dst_mean, float ek_mean, float totalTime)
     {
@@ -92,5 +103,11 @@ public class HandleTextFile : MonoBehaviour
         return new Vector2(
             float.Parse(sArray[0]),
             float.Parse(sArray[1]));
+    }
+
+    void OnApplicationQuit()
+    {
+        CloseFile();
+        CloseRecord();
     }
 }

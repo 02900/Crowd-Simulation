@@ -49,7 +49,6 @@ namespace AnticipatoryModel
 
         HandleTextFile results;
         bool playingRec = true;
-        [SerializeField] bool RecordStats;
 
         // Hold pairs of agents in same group
         List<Tuple<int, int>> pairs = new List<Tuple<int, int>>();
@@ -113,7 +112,7 @@ namespace AnticipatoryModel
                 Agents[i].Init(i, position, goal);
             }
 
-            if (RecordStats)
+            if (results.recordStats)
             {
                 DST_TRAVEL = new float[agents.Length];
                 TIME_TRAVEL = new float[agents.Length];
@@ -131,6 +130,11 @@ namespace AnticipatoryModel
             while (true)
             {
                 yield return new WaitForSeconds(timeStep);
+                if (Input.GetKey(KeyCode.Q)) {
+                    ForceFinish();
+                    yield break;
+                }
+
                 if (Input.GetKey(KeyCode.Z)) UpdateSimulation();
                 else PauseAnimation();
             }
@@ -147,7 +151,7 @@ namespace AnticipatoryModel
                 yield return new WaitForSeconds(moreDelayedTimeStep);
                 if (!results.loadRec && Input.GetKey(KeyCode.Z))
                 {
-                    for (int i = 0; i < Agents.Length && RecordStats; i++)
+                    for (int i = 0; i < Agents.Length && results.recordStats; i++)
                     {
                         if (agents[i].velocity != Vector2.zero)
                             EKinematic[i] += mass_half * Agents[i].velocity.sqrMagnitude;
@@ -155,6 +159,20 @@ namespace AnticipatoryModel
                     DetectingGroups();
                     framesCountDelayed++;
                 }
+            }
+        }
+
+        void ForceFinish() {
+            foreach (var a in agents) {
+                if (finish[a.id]) continue;
+                if (results.recordStats)
+                {
+                    TIME_TRAVEL[a.id] = framesCount * timeStep;
+                    EKinematic[a.id] /= framesCountDelayed;
+                    AddAgentStat(TIME_TRAVEL[a.id], DST_TRAVEL[a.id]);
+                }
+                agents[a.id].Anim.ResetAnimParameters(timeStep, true);
+                finish[a.id] = true;
             }
         }
 
@@ -175,7 +193,7 @@ namespace AnticipatoryModel
                     prevPos = agents[i].position;
                     finish[i] = agents[i].DoStep();
 
-                    if (RecordStats && agents[i].velocity != Vector2.zero)
+                    if (results.recordStats && agents[i].velocity != Vector2.zero)
                     {
                         float dstChange = Vector2.Distance(prevPos, agents[i].position);
                         DST_TRAVEL[i] += dstChange;
@@ -183,7 +201,7 @@ namespace AnticipatoryModel
 
                     if (finish[i])
                     { 
-                        if (RecordStats) {
+                        if (results.recordStats) {
                             TIME_TRAVEL[i] = framesCount * timeStep;
                             EKinematic[i] /= framesCountDelayed;
                             AddAgentStat(TIME_TRAVEL[i], DST_TRAVEL[i]);

@@ -72,9 +72,13 @@ namespace PowerLaw
                 agents[i].Init(i, position, goal);
             }
 
-            DST_TRAVEL = new float[agents.Length];
-            TIME_TRAVEL = new float[agents.Length];
-            EKinematic = new float[agents.Length];
+            if (results.recordStats)
+            {
+                DST_TRAVEL = new float[agents.Length];
+                TIME_TRAVEL = new float[agents.Length];
+                EKinematic = new float[agents.Length];
+            }
+
             finish = new bool[agents.Length];
         }
 
@@ -96,6 +100,8 @@ namespace PowerLaw
                 ek_mean /= agents.Length;
                 results.WriteString(time_mean, dst_mean, ek_mean,
                     TimesTravel[agents.Length - 1]);
+
+                results.CloseRecord();
             }
         }
 
@@ -115,7 +121,7 @@ namespace PowerLaw
                 yield return new WaitForSeconds(moreDelayedTimeStep);
                 if (!results.loadRec && Input.GetKey(KeyCode.Z))
                 {
-                    for (int i = 0; i < agents.Length && results.record; i++)
+                    for (int i = 0; i < agents.Length && results.recordStats; i++)
                     {
                         if (agents[i].Velocity != Vector2.zero)
                             EKinematic[i] += mass_half * agents[i].Velocity.sqrMagnitude;
@@ -134,8 +140,29 @@ namespace PowerLaw
             while (true)
             {
                 yield return new WaitForSeconds(timeStep);
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    ForceFinish();
+                    yield break;
+                }
                 if (Input.GetKey(KeyCode.Z)) UpdateSimulation();
                 else PauseAnimation();
+            }
+        }
+
+        void ForceFinish()
+        {
+            foreach (var a in agents)
+            {
+                if (finish[a.id]) continue;
+                if (results.recordStats)
+                {
+                    TIME_TRAVEL[a.id] = framesCount * timeStep;
+                    EKinematic[a.id] /= framesCountDelayed;
+                    AddAgentStat(TIME_TRAVEL[a.id], DST_TRAVEL[a.id]);
+                }
+                agents[a.id].ResetAnimParameters(true);
+                finish[a.id] = true;
             }
         }
 
@@ -148,7 +175,6 @@ namespace PowerLaw
             if (!results.loadRec)
             {
                 framesCount++;
-
                 Vector2 prevPos;
 
                 for (int i = 0; i < agents.Length; i++)
@@ -158,7 +184,7 @@ namespace PowerLaw
                     prevPos = agents[i].Position;
                     finish[i] = agents[i].DoStep();
 
-                    if (results.record && agents[i].Velocity != Vector2.zero)
+                    if (results.recordStats && agents[i].Velocity != Vector2.zero)
                     {
                         float dstChange = Vector2.Distance(prevPos, agents[i].Position);
                         DST_TRAVEL[i] += dstChange;
@@ -166,13 +192,12 @@ namespace PowerLaw
 
                     if (finish[i])
                     {
-                        if (results.record) {
+                        if (results.recordStats) {
                             TIME_TRAVEL[i] = framesCount * timeStep;
                             EKinematic[i] /= framesCountDelayed;
                             AddAgentStat(TIME_TRAVEL[i], DST_TRAVEL[i]);
                         }
                         agents[i].ResetAnimParameters(true);
-
                     }
                 }
             }
