@@ -1,0 +1,6 @@
+Test 2.4/2.4 RVO2 Four way confusion
+Colisiones totales 0 en 1845 frames
+Tiempo total 18.45
+Tiempo promedio 18.45
+Distancia media 3.91287
+Energia cinetica media 1.873371

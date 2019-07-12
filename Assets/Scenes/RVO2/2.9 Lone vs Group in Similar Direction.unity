@@ -11935,7 +11935,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testName: 2.9/2.9 RVO2 Lone vs Group in Similar Direction
   recName: 2.9/2.9 RVO2 Lone vs Group in Similar Direction-0
-  record: 0
+  recordStats: 1
+  record: 1
   loadRec: 0
 --- !u!1 &654476941
 GameObject:

@@ -1,0 +1,6 @@
+Test 2.12 PL Crossing (2 groups)
+Colisiones totales 322 en 2202 frames
+Tiempo total 22.02
+Tiempo promedio 19.41594
+Distancia media 25.0148
+Energia cinetica media 56.21976

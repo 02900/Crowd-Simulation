@@ -1,0 +1,6 @@
+Test 2.12/2.12 AM Hallway two way
+Colisiones totales 201.5 en 1878 frames
+Tiempo total 18.78
+Tiempo promedio 17.88531
+Distancia media 24.74385
+Energia cinetica media 63.33197

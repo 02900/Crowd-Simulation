@@ -27,8 +27,9 @@ namespace PowerLaw
         const float moreDelayedTimeStep = 0.2f;
         public static Engine Instance;
         const float mass_half = 33;
-        float framesCount;
-        float framesCountDelayed;
+        int framesCount;
+        int framesCountDelayed;
+        float hits;
 
         // The proximity database.
         protected LQProximityDatabase spatialDatabase;
@@ -57,8 +58,8 @@ namespace PowerLaw
         void Awake(){
             Instance = this;
             spatialDatabase = new LQProximityDatabase(Vector3.zero, new Vector3(500, 0, 500), new Vector3(10, 0, 10));
-            CreateAgents();
             results = FindObjectOfType<HandleTextFile>();
+            CreateAgents();
         }
 
         void CreateAgents()
@@ -99,7 +100,7 @@ namespace PowerLaw
                 dst_mean /= DistancesTravel.Count;
                 ek_mean /= agents.Length;
                 results.WriteString(time_mean, dst_mean, ek_mean,
-                    TimesTravel[agents.Length - 1]);
+                    TimesTravel[agents.Length - 1], hits, framesCount);
 
                 results.CloseRecord();
             }
@@ -184,6 +185,18 @@ namespace PowerLaw
                     prevPos = agents[i].Position;
                     finish[i] = agents[i].DoStep();
 
+                    for (int j = 0; j < agents.Length; j++)
+                    {
+                        if (i == j) continue;
+                        float rA, rB;
+                        Vector2 posA, posB;
+                        rA = agents[i].Radius;
+                        rB = agents[j].Radius;
+                        posA = agents[i].Position;
+                        posB = agents[j].Position;
+                        IsColliding(posA, rA, posB, rB);
+                    }
+
                     if (results.recordStats && agents[i].Velocity != Vector2.zero)
                     {
                         float dstChange = Vector2.Distance(prevPos, agents[i].Position);
@@ -248,5 +261,13 @@ namespace PowerLaw
         /// <param name="id">id The id of the obstacle.</param>
         /// <returns>Returns the corresponding line obstacle given its id.</returns>
         public LineObstacle GetObstacle(int id) { return obstacles[id]; }
+
+        void IsColliding(Vector2 posA, float radA, Vector2 posB, float radB)
+        {
+            float r = radA + radB;
+            Vector2 w = posB - posA;
+            float c = Vector2.Dot(w, w) - r * r;
+            if (c < 0) hits += 1;
+        }
     }
 }

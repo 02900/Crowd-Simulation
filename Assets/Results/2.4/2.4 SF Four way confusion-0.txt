@@ -1,0 +1,6 @@
+Test 2.4/2.4 SF Four way confusion
+Colisiones totales 12434 en 2640 frames
+Tiempo total 26.4
+Tiempo promedio 26.4
+Distancia media 9.708942
+Energia cinetica media 13.11621

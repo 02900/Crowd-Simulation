@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using AnticipatoryModel;
+using CrowdSimulation;
 
 public class InstanciateAgents : MonoBehaviour
 {
@@ -56,7 +56,7 @@ public class InstanciateAgents : MonoBehaviour
         for (int i = 0; i < nroAgents; i++)
         {
             GameObject go = Instantiate(agent, Vector3.zero, Quaternion.identity, parent);
-            go.GetComponent<AMVirtualAgent>().id += i; 
+            go.GetComponent<VirtualAgent>().id += i; 
         }
     }
 

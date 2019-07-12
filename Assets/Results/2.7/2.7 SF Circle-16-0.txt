@@ -1,0 +1,6 @@
+Test 2.7/2.7 SF Circle-16
+Colisiones totales 6684 en 1987 frames
+Tiempo total 19.87
+Tiempo promedio 19.35688
+Distancia media 19.94419
+Energia cinetica media 40.46295

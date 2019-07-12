@@ -484,8 +484,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testName: 2.4/2.4 SF Four way confusion
   recName: 2.4/2.4 SF Four way confusion-0
-  record: 0
-  loadRec: 1
+  recordStats: 1
+  record: 1
+  loadRec: 0
 --- !u!1 &685041553
 GameObject:
   m_ObjectHideFlags: 0

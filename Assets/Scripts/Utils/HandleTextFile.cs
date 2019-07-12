@@ -53,20 +53,24 @@ public class HandleTextFile : MonoBehaviour
 
     public void RecordStep (Vector2 Position, Vector2 Velocity)
     {
-        if (writer == null) return;
+        if (!record) return;
         writer.WriteLine(Position.ToString("F4"));
         writer.WriteLine(Velocity.ToString("F4"));
     }
 
     public void CloseRecord() {
-        if (record && writer != null) writer.Close();
+        if (record && writer != null){
+            writer.Close();
+            record = false;
+        }
     }
 
-    public void WriteString(float time_mean, float dst_mean, float ek_mean, float totalTime)
+    public void WriteString(float time_mean, float dst_mean, float ek_mean, float totalTime, float hits, int frames)
     {
         string path = "Assets/Results/" + testName + "-" + i + ".txt";
         StreamWriter writer = new StreamWriter(path, true);
         writer.WriteLine("Test " + testName);
+        writer.WriteLine("Colisiones totales " + hits + " en " + frames + " frames");
         writer.WriteLine("Tiempo total " + totalTime);
         writer.WriteLine("Tiempo promedio " + time_mean);
         writer.WriteLine("Distancia media " + dst_mean);

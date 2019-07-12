@@ -1,0 +1,6 @@
+Test 2.10/2.10 AM Oncoming-groups
+Colisiones totales 915 en 1050 frames
+Tiempo total 10.5
+Tiempo promedio 8.818667
+Distancia media 11.48455
+Energia cinetica media 56.52554

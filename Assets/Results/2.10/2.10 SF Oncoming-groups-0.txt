@@ -1,0 +1,6 @@
+Test 2.10/2.10 SF Oncoming-groups
+Colisiones totales 2507 en 2026 frames
+Tiempo total 20.26
+Tiempo promedio 11.107
+Distancia media 9.974803
+Energia cinetica media 38.07924

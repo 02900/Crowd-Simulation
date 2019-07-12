@@ -1,0 +1,6 @@
+Test 2.7/2.7 PL Circle-16
+Colisiones totales 3904 en 2076 frames
+Tiempo total 20.76
+Tiempo promedio 18.75562
+Distancia media 19.78895
+Energia cinetica media 41.59434

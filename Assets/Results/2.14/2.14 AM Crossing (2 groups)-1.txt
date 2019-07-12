@@ -1,0 +1,6 @@
+Test 2.14/2.14 AM Crossing (2 groups)
+Colisiones totales 23.5 en 1987 frames
+Tiempo total 19.87
+Tiempo promedio 17.92281
+Distancia media 24.84006
+Energia cinetica media 63.49071

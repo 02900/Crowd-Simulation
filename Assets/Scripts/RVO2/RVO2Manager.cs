@@ -12,8 +12,9 @@ namespace RVO2
         const float goalRadius = 0.5f;
         public static RVO2Manager Instance;
         const float mass_half = 33;
-        float framesCount;
-        float framesCountDelayed;
+        int framesCount;
+        int framesCountDelayed;
+        int hits;
 
         RVO2Agent[] agents;
         public RVO2Agent[] Agents { get { return agents; } }
@@ -24,6 +25,7 @@ namespace RVO2
         [SerializeField] int maxNeighbor = 10;
         [SerializeField] float timeHorizon = 10;
         [SerializeField] float timeHorizonObst = 10;
+        Vector2[] prevPos;
 
         float[] DST_TRAVEL;
         float[] TIME_TRAVEL;
@@ -48,8 +50,8 @@ namespace RVO2
             Simulator.Instance.setAgentDefaults(neighborDist, maxNeighbor, timeHorizon,
                 timeHorizonObst, radius, speed, new Vector2(0.0f, 0.0f));
 
-            CreateAgents();
             results = FindObjectOfType<HandleTextFile>();
+            CreateAgents();
         }
 
         void CreateAgents()
@@ -77,6 +79,7 @@ namespace RVO2
 
             TimesTravel = new List<float>();
             DistancesTravel = new List<float>();
+            prevPos = new Vector2[agents.Length];
         }
 
         void AddAgentStat(float time, float dst)
@@ -96,7 +99,7 @@ namespace RVO2
                 dst_mean /= DistancesTravel.Count;
                 ek_mean /= agents.Length;
                 results.WriteString(time_mean, dst_mean, ek_mean, 
-                    TimesTravel[agents.Length-1]);
+                    TimesTravel[agents.Length-1], hits, framesCount);
 
                 results.CloseRecord();
             }
@@ -179,7 +182,6 @@ namespace RVO2
             if (!results.loadRec)
             {
                 framesCount++;
-                Vector2[] prevPos = new Vector2[agents.Length];
                 for (int i = 0; i < agents.Length; ++i)
                     prevPos[i] = GetPosition(i);
 
@@ -190,6 +192,19 @@ namespace RVO2
                 {
                     if (results.record) results.RecordStep(GetPosition(i), GetVelocity(i));
                     if (finish[i]) continue;
+
+                    for (int j = 0; j < agents.Length; j++)
+                    {
+                        if (i == j) continue;
+                        float rA, rB;
+                        Vector2 posA, posB;
+                        rA = GetRadius(i);
+                        if (finish[j]) rB = rA;
+                        else rB = GetRadius(j);
+                        posA = GetPosition(i);
+                        posB = GetPosition(j);
+                        IsColliding(posA, rA, posB, rB);
+                    }
 
                     agents[i].MoveInRealWorld(GetPosition(i), GetVelocity(i));
 
@@ -203,6 +218,7 @@ namespace RVO2
 
                     if (finish[i])
                     {
+                        Simulator.Instance.setAgentFinish(i);
                         if (results.recordStats) {
                             TIME_TRAVEL[i] = framesCount * timeStep;
                             EKinematic[i] /= framesCountDelayed;
@@ -268,6 +284,14 @@ namespace RVO2
                 goalVector *= GetPrefSpeed(i) / goalVector.magnitude;
                 Simulator.Instance.setAgentPrefVelocity(i, goalVector);
             }
+        }
+
+        void IsColliding(Vector2 posA, float radA, Vector2 posB, float radB)
+        {
+            float r = radA + radB;
+            Vector2 w = posB - posA;
+            float c = Vector2.Dot(w, w) - r * r;
+            if (c < 0) hits += 1;
         }
     }
 }

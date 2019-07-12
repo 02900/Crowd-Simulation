@@ -70,6 +70,7 @@ namespace PowerLaw
 
         public Vector2 Position { get { return position; } set { position = value; } }
         public Vector2 Velocity { get { return velocity; } set { velocity = value; } }
+        public float Radius { get { return radius; } }
 
         void Awake()
         {
@@ -134,11 +135,11 @@ namespace PowerLaw
             velocity += F * Engine.timeStep;
 
             // Limit velocity to prefSpeed of agent
-            //if (velocity.sqrMagnitude > (prefSpeed * prefSpeed))
-            //{
-            //    velocity.Normalize();
-            //    velocity *= prefSpeed;
-            //}
+            if (velocity.sqrMagnitude > (prefSpeed * prefSpeed))
+            {
+                velocity.Normalize();
+                velocity *= prefSpeed;
+            }
 
             position += velocity * Engine.timeStep;
             // notify proximity database that our position has changed

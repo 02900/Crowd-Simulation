@@ -1,0 +1,6 @@
+Test 2.4/2.4 PL Four way confusion
+Colisiones totales 0 en 1120 frames
+Tiempo total 11.2
+Tiempo promedio 11.1975
+Distancia media 9.711813
+Energia cinetica media 30.15477

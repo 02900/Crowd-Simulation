@@ -1,0 +1,6 @@
+Test 2.8/2.8 AM Lone vs Group
+Colisiones totales 0 en 759 frames
+Tiempo total 7.59
+Tiempo promedio 6.71125
+Distancia media 9.325561
+Energia cinetica media 63.91944

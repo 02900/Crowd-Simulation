@@ -222,7 +222,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testName: 2.4/2.4 RVO2 Four way confusion
   recName: 2.4/2.4 RVO2 Four way confusion-0
-  record: 0
+  recordStats: 1
+  record: 1
   loadRec: 0
 --- !u!1 &685041553
 GameObject:

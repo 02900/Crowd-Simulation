@@ -1,0 +1,6 @@
+Test 2.10/2.10 PL Oncoming-groups
+Colisiones totales 22124 en 2402 frames
+Tiempo total 24.02
+Tiempo promedio 12.685
+Distancia media 10.0179
+Energia cinetica media 25.78619

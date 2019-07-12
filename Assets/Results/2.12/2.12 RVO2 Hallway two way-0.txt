@@ -1,0 +1,6 @@
+Test 2.12/2.12 RVO2 Hallway two way
+Colisiones totales 0 en 1758 frames
+Tiempo total 17.58
+Tiempo promedio 17.54375
+Distancia media 24.52675
+Energia cinetica media 64.33786

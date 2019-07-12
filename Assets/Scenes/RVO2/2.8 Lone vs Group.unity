@@ -9179,13 +9179,29 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 473399703}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a67b1b5a50697d242820907f9f26e365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: -6.3, y: 6.56, z: 0}
-  targets: []
+  targets:
+  - {fileID: 1338907317}
+  - {fileID: 2015246070}
+  - {fileID: 1990030607}
+  - {fileID: 2081870170}
+  - {fileID: 2014344481}
+  - {fileID: 464772712}
+  - {fileID: 1495421083}
+  - {fileID: 1947824378}
+  - {fileID: 465591976}
+  - {fileID: 496201009}
+  - {fileID: 1100284242}
+  - {fileID: 1726099399}
+  - {fileID: 1813219760}
+  - {fileID: 844096024}
+  - {fileID: 3679052}
+  - {fileID: 734617492}
   smoothTime: 0.5
   minZoom: 60
   maxZoom: 60
@@ -12052,8 +12068,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testName: 2.8/2.8 RVO2 Lone vs Group
   recName: 2.8/2.8 RVO2 Lone vs Group-0
+  recordStats: 0
   record: 0
-  loadRec: 0
+  loadRec: 1
 --- !u!1 &654471876
 GameObject:
   m_ObjectHideFlags: 0
@@ -13401,6 +13418,11 @@ Transform:
   m_Father: {fileID: 904216083}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &734617492 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4419674250512404, guid: 9e9c702e9b2386144bcc9d855a6ba0c8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1955468680}
 --- !u!1 &736095622
 GameObject:
   m_ObjectHideFlags: 0

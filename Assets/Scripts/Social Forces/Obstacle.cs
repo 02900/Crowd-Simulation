@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Hydra.HydraCommon.Utils.Comparers;
 using SocialForces;
 
-public class Obstacle : MonoBehaviour
+public class SFObstacle : MonoBehaviour
 {
     private Mesh mesh;
     [SerializeField] private GameObject prefab;
@@ -19,34 +18,43 @@ public class Obstacle : MonoBehaviour
         {
             mesh = GetComponent<MeshFilter>().sharedMesh;
             Vector3[] vertices = mesh.vertices;
-            List<EdgeHelpers.Edge> boundaryPath = EdgeHelpers.GetEdges(mesh.triangles).FindBoundary().SortEdges();
+            //List<EdgeHelpers.Edge> boundaryPath = EdgeHelpers.GetEdges(mesh.triangles).FindBoundary().SortEdges();
             Vector2 v = new Vector2();
 
-            for (int i = 0; i < boundaryPath.Count; i++)
+            for (int i = 0; i < vertices.Length; i++)
             {
-                Vector3 offset = transform.position;
-                Vector3 pos = vertices[boundaryPath[i].v1] + offset;
-                pos = ExtensionMethods.RotatePointAroundPivot(pos, transform.position, transform.rotation);
-                v.x = (float)System.Math.Round(pos.x, 1);
-                v.y = (float)System.Math.Round(pos.z, 1);
+                if (System.Math.Abs(vertices[i].y) < 0.1f)
+                {
+                    Vector3 offset = transform.position;
+                    Vector3 pos = vertices[i] + offset;
+                    pos = ExtensionMethods.RotatePointAroundPivot(pos, transform.position, transform.rotation);
+                    v.x = (float)System.Math.Round(pos.x, 1);
+                    v.y = (float)System.Math.Round(pos.z, 1);
 
-                if (!contour.Contains(v))
-                    contour.Add(v);
+                    if (!contour.Contains(v))
+                    {
+                        contour.Add(v);
+                        Instantiate(prefab, pos, Quaternion.identity, transform);
+                    }
+                }
             }
 
-            if (type == TypePolygon.CONCAVE)
+            if (contour.Count > 1)
             {
-                ch = new ConcaveHull();
-                contour = ch.CalculateConcaveHull(contour, 3);
-                contour.RemoveAt(contour.Count - 1);
-                contour.Reverse();
-            }
+                if (type == TypePolygon.CONCAVE)
+                {
+                    ch = new ConcaveHull();
+                    contour = ch.CalculateConcaveHull(contour, 3);
+                    //contour.RemoveAt(contour.Count - 1);
+                    contour.Reverse();
+                }
 
-            else if (type == TypePolygon.CONVEX)
-            {
-                Vector2 position = new Vector2(transform.position.x, transform.position.z);
-                ClockwiseComparer c = new ClockwiseComparer(position);
-                contour.Sort(c);
+                else if (type == TypePolygon.CONVEX)
+                {
+                    int n = contour.Count;
+                    contour = ConvexHull.convexHull(contour, n);
+                    contour.Reverse();
+                }
             }
         }
 
@@ -81,19 +89,19 @@ public class Obstacle : MonoBehaviour
                 pos = ExtensionMethods.RotatePointAroundPivot(pos, transform.position, transform.rotation);
                 contour.Add(new Vector2(pos.x, pos.z));
             }
-        }
 
-        foreach (var position2d in contour)
-        {
-            Vector3 p = new Vector3(position2d.x, 0, position2d.y);
-            Instantiate(prefab, p, Quaternion.identity, transform);
+            foreach (var position2d in contour)
+            {
+                Vector3 p = new Vector3(position2d.x, 0, position2d.y);
+                Instantiate(prefab, p, Quaternion.identity, transform);
+            }
         }
 
         if (type != TypePolygon.NONE)
         {
-            for (int i = 0; i < contour.Count-1; i++)
+            for (int i = 0; i < contour.Count - 1; i++)
             {
-                Wall w = new Wall(contour[i].x, contour[i].y, contour[i+1].x, contour[i+1].y);
+                Wall w = new Wall(contour[i].x, contour[i].y, contour[i + 1].x, contour[i + 1].y);
                 Engine.Instance.AddWall(w);
             }
         }
@@ -107,12 +115,19 @@ public class Obstacle : MonoBehaviour
     void OnDrawGizmos()
     {
         //Concave hull
-        Gizmos.color = Color.yellow;
+        Vector3 left, right;
         for (int i = 0; i < contour.Count - 1; i++)
         {
-            Vector3 left = new Vector3(contour[i].x, 2, contour[i].y);
-            Vector3 right = new Vector3(contour[i+1].x, 2, contour[i+1].y);
-            Gizmos.DrawLine(left, right);
+            left = new Vector3(contour[i].x, 1, contour[i].y);
+            right = new Vector3(contour[i + 1].x, 1, contour[i + 1].y);
+            ExtensionMethods.DrawLine(left, right, 1, Color.yellow);
+        }
+
+        if (contour.Count > 0)
+        {
+            left = new Vector3(contour[0].x, 1, contour[0].y);
+            right = new Vector3(contour[contour.Count - 1].x, 1, contour[contour.Count - 1].y);
+            ExtensionMethods.DrawLine(left, right, 1, Color.yellow);
         }
     }
 }

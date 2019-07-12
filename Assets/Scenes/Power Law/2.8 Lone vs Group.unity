@@ -3177,6 +3177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -4581,6 +4582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -5527,6 +5529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -11835,6 +11838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testName: 2.8/2.8 PL Lone vs Group
   recName: 2.8/2.8 PL Lone vs Group-0
+  recordStats: 0
   record: 0
   loadRec: 0
 --- !u!1 &651777465
@@ -13837,6 +13841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -14389,6 +14394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -15772,6 +15778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -17494,6 +17501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -24915,6 +24923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -30183,6 +30192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -36061,6 +36071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -36415,6 +36426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -37353,6 +37365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -38737,6 +38750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -40097,6 +40111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -40941,6 +40956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0098bcd69d2660f4a91bdd2f0d8808e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}

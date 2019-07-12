@@ -1,0 +1,6 @@
+Test 2.12/2.12 SF Crossing (2 groups)
+Colisiones totales 24670 en 5494 frames
+Tiempo total 54.94
+Tiempo promedio 27.22531
+Distancia media 22.47098
+Energia cinetica media 34.89321

@@ -24376,7 +24376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testName: 2.10/2.10 RVO2 Oncoming-groups
   recName: 2.10/2.10 RVO2 Oncoming-groups-0
-  record: 0
+  recordStats: 1
+  record: 1
   loadRec: 0
 --- !u!1 &652292407
 GameObject:

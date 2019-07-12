@@ -1305,6 +1305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -2753,6 +2754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -4480,6 +4482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -11705,7 +11708,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testName: 2.8/2.8 SF Lone vs Group
   recName: 2.8/2.8 SF Lone vs Group-0
-  record: 0
+  recordStats: 1
+  record: 1
   loadRec: 0
 --- !u!1 &654070990
 GameObject:
@@ -13054,6 +13058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -13992,6 +13997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -21155,6 +21161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -21716,6 +21723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -23717,6 +23725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -24686,6 +24695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -24977,6 +24987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -27085,6 +27096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -34089,6 +34101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -34464,6 +34477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -36206,6 +36220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}
@@ -36726,6 +36741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a86f7a8f91a465ead14ee493611eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   navmesh: 0
   fixedPrefSpeed: 1.4
   Color1: {r: 0, g: 0.84705883, b: 0.21568628, a: 1}

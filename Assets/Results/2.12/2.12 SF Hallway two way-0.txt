@@ -1,0 +1,6 @@
+Test 2.12/2.12 SF Hallway two way
+Colisiones totales 12557 en 4330 frames
+Tiempo total 43.3
+Tiempo promedio 25.88062
+Distancia media 25.42912
+Energia cinetica media 42.60155

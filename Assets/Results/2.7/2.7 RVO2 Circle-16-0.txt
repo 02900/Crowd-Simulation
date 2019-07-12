@@ -1,0 +1,6 @@
+Test 2.7/2.7 RVO2 Circle-16
+Colisiones totales 0 en 2024 frames
+Tiempo total 20.24
+Tiempo promedio 20.24
+Distancia media 7.567761
+Energia cinetica media 6.127137

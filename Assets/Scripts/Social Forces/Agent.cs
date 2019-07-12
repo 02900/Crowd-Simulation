@@ -34,6 +34,7 @@ namespace SocialForces
 
         public Vector2 Position { get { return position; } set { position = value; } }
         public Vector2 Velocity { get { return velocity; } set { velocity = value; } }
+        public float Radius { get { return radius; } }
 
         #region for navigation
         Transform target;                 // Empty gameObject attached to a agent to set his goal point

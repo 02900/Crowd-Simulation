@@ -1,0 +1,6 @@
+Test 2.12/2.12 RVO2 Crossing (2 groups)
+Colisiones totales 0 en 1831 frames
+Tiempo total 18.31
+Tiempo promedio 17.63188
+Distancia media 24.53455
+Energia cinetica media 63.76656

@@ -1,0 +1,6 @@
+Test 2.11/2.11 SF Lone vs Group in Similar Direction
+Colisiones totales 2162 en 920 frames
+Tiempo total 9.2
+Tiempo promedio 6.832333
+Distancia media 17.22297
+Energia cinetica media 340.3129

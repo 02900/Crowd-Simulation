@@ -1,0 +1,6 @@
+Test 2.8/2.8 PL Lone vs Group
+Colisiones totales 3560 en 2722 frames
+Tiempo total 27.22
+Tiempo promedio 9.796875
+Distancia media 9.942309
+Energia cinetica media 44.46553

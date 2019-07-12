@@ -1,0 +1,6 @@
+Test 2.10/2.10 RVO2 Oncoming-groups
+Colisiones totales 0 en 778 frames
+Tiempo total 7.78
+Tiempo promedio 6.965999
+Distancia media 9.564031
+Energia cinetica media 63.05949

@@ -1,0 +1,6 @@
+Test 2.9/2.9 PL Lone vs Group in Similar Direction
+Colisiones totales 837 en 852 frames
+Tiempo total 8.52
+Tiempo promedio 7.418749
+Distancia media 10.50272
+Energia cinetica media 76.12697

@@ -10,8 +10,9 @@ namespace SocialForces
         public const float timeStep = 0.01f;
         const float moreDelayedTimeStep = 0.2f;
         const float mass_half = 33;
-        float framesCount;
-        float framesCountDelayed;
+        int framesCount;
+        int framesCountDelayed;
+        float hits;
 
         Agent[] agents;
         public Agent[] Agents { get { return agents; } }
@@ -39,8 +40,8 @@ namespace SocialForces
         void Awake()
         {
             Instance = this;
-            CreateAgents();
             results = FindObjectOfType<HandleTextFile>();
+            CreateAgents();
         }
 
         void CreateAgents()
@@ -81,7 +82,7 @@ namespace SocialForces
                 dst_mean /= DistancesTravel.Count;
                 ek_mean /= agents.Length;
                 results.WriteString(time_mean, dst_mean, ek_mean,
-                    TimesTravel[agents.Length - 1]);
+                    TimesTravel[agents.Length - 1], hits, framesCount);
 
                 results.CloseRecord();
             }
@@ -165,6 +166,18 @@ namespace SocialForces
                     prevPos = agents[i].Position;
                     finish[i] = agents[i].DoStep();
 
+                    for (int j = 0; j < agents.Length; j++)
+                    {
+                        if (i == j) continue;
+                        float rA, rB;
+                        Vector2 posA, posB;
+                        rA = Agents[i].Radius;
+                        rB = Agents[j].Radius;
+                        posA = Agents[i].Position;
+                        posB = Agents[j].Position;
+                        IsColliding(posA, rA, posB, rB);
+                    }
+
                     if (results.recordStats && agents[i].Velocity != Vector2.zero)
                     {
                         float dstChange = Vector2.Distance(prevPos, agents[i].Position);
@@ -203,6 +216,15 @@ namespace SocialForces
         {
             for (int i = 0; i < agents.Length; i++)
                 agents[i].ResetAnimParameters();
+        }
+
+
+        void IsColliding(Vector2 posA, float radA, Vector2 posB, float radB)
+        {
+            float r = radA + radB;
+            Vector2 w = posB - posA;
+            float c = Vector2.Dot(w, w) - r * r;
+            if (c < 0) hits += 1;
         }
     }
 }

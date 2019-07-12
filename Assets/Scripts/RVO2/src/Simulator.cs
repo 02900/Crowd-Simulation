@@ -798,6 +798,11 @@ namespace RVO
             agents_[agentNo2indexDict_[agentNo]].maxSpeed_ = maxSpeed;
         }
 
+        public void setAgentFinish(int agentNo)
+        {
+            agents_[agentNo2indexDict_[agentNo]].iFinish = true;
+        }
+
         /**
          * <summary>Sets the maximum neighbor distance of a specified agent.
          * </summary>

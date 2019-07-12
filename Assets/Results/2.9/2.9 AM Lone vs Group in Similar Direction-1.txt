@@ -1,0 +1,6 @@
+Test 2.9/2.9 AM Lone vs Group in Similar Direction
+Colisiones totales 0 en 662 frames
+Tiempo total 6.62
+Tiempo promedio 6.518751
+Distancia media 10.21908
+Energia cinetica media 111.2864

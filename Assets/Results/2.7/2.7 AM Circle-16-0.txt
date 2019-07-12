@@ -1,0 +1,6 @@
+Test 2.7/2.7 AM Circle-16
+Colisiones totales 89 en 1650 frames
+Tiempo total 16.5
+Tiempo promedio 15.06
+Distancia media 20.93853
+Energia cinetica media 62.56329

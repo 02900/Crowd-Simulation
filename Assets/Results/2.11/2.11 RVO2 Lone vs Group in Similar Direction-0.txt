@@ -1,0 +1,6 @@
+Test 2.11/2.11 RVO2 Lone vs Group in Similar Direction
+Colisiones totales 9 en 991 frames
+Tiempo total 9.91
+Tiempo promedio 6.100667
+Distancia media 16.9223
+Energia cinetica media 417.6113
